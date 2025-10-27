@@ -397,67 +397,442 @@
     </div>
 
     <script>
-        // Food pantry data extracted from PDF
+        // Food pantry data extracted from PDF - Complete Maryland Database
         const pantries = [
-            // Anne Arundel County
+            // ALLEGANY COUNTY
+            {name: "Salvation Army", address: "701 E. First St., Cumberland, MD 21502", hours: "8am-4pm", days: "Mon-Fri", county: "Allegany"},
+            {name: "Lavale U.M.C", address: "565 National Highway, Lavandale, MD 21502", hours: "9:30am-3:30pm", days: "Tue-Fri", county: "Allegany"},
+            {name: "Christ U.M.C.", address: "4th & Race Street, Cumberland, MD 21502", hours: "8am-4pm", days: "Mon-Fri", county: "Allegany"},
+            {name: "Frostburgh Pantry", address: "P.O. Box 301, Frostburgh, MD 21532", hours: "10am-2pm", days: "Mon-Fri", county: "Allegany"},
+            {name: "Cumberland Church of God", address: "401 Industrial Blvd., Cumberland, MD 21502", hours: "10am-1pm, 4-6pm", days: "Wed, Fri", county: "Allegany"},
+            {name: "John F. Kennedy (Restricted)", address: "Mechanic St., #408, Cumberland, MD 21502", hours: "10am-11am", days: "Mon-Fri", county: "Allegany"},
+            {name: "Cumberland Manor (Restricted)", address: "29 Baltimore Ave., Cumberland, MD 21502", hours: "10am-11am", days: "Mon-Fri", county: "Allegany"},
+            {name: "Booth Towers (Restricted)", address: "220 Sommerville Ave., Cumberland, MD 21502", hours: "10am-11am", days: "Mon-Fri", county: "Allegany"},
+            {name: "Queen City Towers (Restricted)", address: "235 Paca Street., Cumberland, MD 21502", hours: "10am-11am", days: "Mon-Fri", county: "Allegany"},
+            {name: "Interfaith Pantry", address: "301 Cumberland St., Cumberland, MD 21502", hours: "9am-2pm", days: "Mon-Fri", county: "Allegany"},
+            {name: "Healing Hunger", address: "19210 Opessa St. S/E, Oldtown, MD 21555", hours: "9am-2pm", days: "Tue & Fri", county: "Allegany"},
+            {name: "Hope Station", address: "6 Pershing St., Cumberland, MD 21502", hours: "9am-3pm", days: "Mon-Fri", county: "Allegany"},
+            {name: "Lavale Assembly Church", address: "525 National Highway, Lavale, MD 21502", hours: "10am-11am", days: "Mon-Fri", county: "Allegany"},
+            
+            // ANNE ARUNDEL COUNTY
+            {name: "All Hallows Episcopal Church", address: "3604 Sol. Is. Rd, Davidsonville, MD 21035", hours: "9:30am-12pm", days: "Mon", county: "Anne Arundel"},
+            {name: "Annapolis Church of God", address: "84 Janwal Street, Annapolis, MD 21403", hours: "9am-5pm, 11-2pm", days: "Tue, Th, Fri, Sun", county: "Anne Arundel"},
+            {name: "Annapolis Garden", address: "1840 Bowman Court, Annapolis, MD 21401", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "Annapolis Spanish Church", address: "1840 Margaret Avenue, Annapolis, MD 21401", hours: "12-2pm", days: "Sat", county: "Anne Arundel"},
+            {name: "Apostolic House of Prayer", address: "413 Headquarters Dr., Millersville", hours: "Call", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Asbury Broadneck UMC", address: "657 Broadneck Rd., Annapolis, MD 21401", hours: "10-12pm", days: "2nd & 4th Thu", county: "Anne Arundel"},
+            {name: "Asbury UMC", address: "87 West Street, Annapolis, MD 21401", hours: "1-3pm", days: "Wed, Fri, Sat", county: "Anne Arundel"},
+            {name: "Beacon Light 7th Day", address: "1943 Drew Street, Annapolis, MD 21403", hours: "7-9:30pm, 9-9:30am", days: "Tue, Sat", county: "Anne Arundel"},
+            {name: "Brooklyn Heights UMC", address: "110 Townsend Ave., Brooklyn, MD 21225", hours: "Call", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Brooklyn UMC", address: "4th & Pontiac, Brooklyn MD 21225", hours: "9am-12noon", days: "Mon, Wed, Thu", county: "Anne Arundel"},
+            {name: "Burwood Gardens", address: "6652 Shelly Rd., Glen Burnie, MD 21061", hours: "Call", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Cecil Memorial UMC", address: "15 Parole Street, Annapolis, MD 21401", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "Chews Memorial UMC", address: "492 Owensville Road, Harwood, MD 20776", hours: "9am-12pm", days: "1st and 3rd Fri", county: "Anne Arundel"},
+            {name: "Christian Assistance Program", address: "1239 Murray Rd, Odenton, MD 21113", hours: "11am-1pm, 3pm-5pm", days: "Tue, Thu", county: "Anne Arundel"},
+            {name: "Church on the Rocks", address: "900 Church Street, Baltimore, MD 21225", hours: "9am-11am", days: "Tue & Thu", county: "Anne Arundel"},
+            {name: "Community UMC", address: "8680 Fort Smallwood Rd, Pasadenia 21122", hours: "9am-3pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Faith Assembly of God", address: "250 W. Bayfront Road, Lothian, MD 20711", hours: "Call First", days: "", county: "Anne Arundel"},
+            {name: "Faith Baptist Church", address: "7857 Furnace Branch Rd Glen Burnie MD 21061", hours: "9:30am-3:30pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "First Baptist of Eastport", address: "206 Chesapeake Ave., Annapolis, MD 21403", hours: "10am-12noon", days: "Tue", county: "Anne Arundel"},
+            {name: "First Baptist of Edgewater", address: "38 W. Central Ave., Edgewater, MD 21037", hours: "9:30am-2:30am", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "First Baptist of Annapolis", address: "31 W. Washington St., Annapolis, MD 21401", hours: "11am-1pm", days: "Sat", county: "Anne Arundel"},
+            {name: "Faith Community", address: "212 B Street, Lothian MD 20711", hours: "9am-12pm", days: "Fri, 3rd Sat", county: "Anne Arundel"},
+            {name: "Gospel Assembly", address: "3555 4th Street, Brooklyn, MD 21225", hours: "1pm-2pm, 5:30-6:45", days: "Sun, Thu", county: "Anne Arundel"},
+            {name: "Greater Morning Star Apostolic Church", address: "8069 Telegraph Rd., Severn, MD 21113", hours: "10am-12pm", days: "Sat", county: "Anne Arundel"},
+            {name: "Heritage Baptist", address: "1740 Forest Drive, Annapolis, MD 21401", hours: "8am-11:30pm, 1:30-3pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Holly Temple Cathedral", address: "708 Bestgate Rd., Annapolis, MD 21401", hours: "Call for hours", days: "", county: "Anne Arundel"},
+            {name: "Iglesia Hispana", address: "16010 Annapolis Rd., Bowie, MD 20715", hours: "3pm-5pm", days: "Sunday", county: "Anne Arundel"},
+            {name: "John Welsley UMC", address: "6922 N. Richie Hwy. GB, MD 21061", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "Lighthouse Shelter", address: "206 West Street, Annapolis, MD 21401", hours: "9am-3pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Lighthouse of Southern MD", address: "300 Fairhaven Rd., Tracey's Landing MD 20779", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "Love & Action", address: "414 Fourth St., Eastpoint, MD 21403", hours: "10am-1pm", days: "Mon, Wed. Fri", county: "Anne Arundel"},
+            {name: "Love is the Key Ministries", address: "3600 South Haven St., Baltimore, MD 21225", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "Magothy UMC", address: "3703 Mountain Rd., Pasadena, MD 21122", hours: "11am-12pm", days: "Sat", county: "Anne Arundel"},
+            {name: "Mount Olive AME Church", address: "2 Hicks Avenue, Annapolis, MD 21401", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "My Brothers Pantry", address: "P.O. Box 223, Arnold, MD 21012", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "NCEON", address: "304 5th St., Glen Burnie, MD 21061", hours: "10am-3:30pm", days: "Mon, Wed, Fri", county: "Anne Arundel"},
+            {name: "Our Lady of Perpetual Help", address: "515 Loch Haven Rd., Edgewater, MD 21037", hours: "10am-12noon", days: "Wed-Fri", county: "Anne Arundel"},
+            {name: "Pasadena Church of God in Christ", address: "Old Mill & Logan Rd. Pasadena, MD 21122", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "Rapture Church", address: "1834 George Ave., Annapolis, MD 21401", hours: "2pm-7pm", days: "Mon-Sat", county: "Anne Arundel"},
+            {name: "Restoration Community Dev.", address: "1812 Virginia Ave., Annapolis MD 21401", hours: "9am-12pm", days: "Sat", county: "Anne Arundel"},
+            {name: "Riva Trace Baptist", address: "2990 Riva Trace Pkwy., Annapolis, MD 21401", hours: "9am-12pm", days: "1st Sat", county: "Anne Arundel"},
+            {name: "S.C.A.N", address: "5757 Sol. Island Road, Lothian, MD 20711", hours: "Call", days: "", county: "Anne Arundel"},
             {name: "Salvation Army", address: "351 Hilltop Lane, Annapolis, MD 21401", hours: "8am-12pm, 12:30pm-4pm", days: "Mon-Fri", county: "Anne Arundel"},
             {name: "Salvation Army", address: "511 So. Crain Hwy., Glen Burnie, MD 21061", hours: "9am-4pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Spanish Church in Brooklyn", address: "P.O. Box 1977, Glen Burnie, MD 21061", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "South County Emergency Baby Pantry", address: "220 Owensville Rd, West River, MD 20778", hours: "Call", days: "Baby Pantry only", county: "Anne Arundel"},
             {name: "SPAN", address: "400 Benfield Rd., Severna Park, MD 21146", hours: "10am-2pm, 5pm-7pm", days: "Mon-Fri, Mon only", county: "Anne Arundel"},
-            {name: "Asbury UMC", address: "87 West Street, Annapolis, MD 21401", hours: "1-3pm", days: "Wed, Fri, Sat", county: "Anne Arundel"},
-            {name: "Heritage Baptist", address: "1740 Forest Drive, Annapolis, MD 21401", hours: "8am-11:30am, 1:30-3pm", days: "Mon-Fri", county: "Anne Arundel"},
-            {name: "NCEON", address: "304 5th St., Glen Burnie, MD 21061", hours: "10am-3:30pm", days: "Mon, Wed, Fri", county: "Anne Arundel"},
-            {name: "Christian Assistance Program", address: "1239 Murray Rd, Odenton, MD 21113", hours: "11am-1pm, 3pm-5pm", days: "Tue, Thu", county: "Anne Arundel"},
             {name: "St. Elizabeth Ann Seton", address: "1800 Seton Dr., Crofton, MD 21114", hours: "9am-4pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "St. John the Evangelist", address: "689 Ritchie Hwy., Severna Park, MD 21146", hours: "10am-12pm, 2pm-4pm", days: "Tue & Thu", county: "Anne Arundel"},
+            {name: "St. James Apostolic", address: "7566 E. Howard Rd., Glen Burnie, MD 21061", hours: "12pm-3pm", days: "4th Tue", county: "Anne Arundel"},
+            {name: "St. Marks", address: "1440 Dorsey Rd., Hanover. MD 21076", hours: "8am-10am", days: "last Sat", county: "Anne Arundel"},
+            {name: "Trinity Outreach Church Fellowship", address: "108 Old Soloman's Island, Annapolis, MD 21401", hours: "1pm-5pm", days: "Thu", county: "Anne Arundel"},
+            {name: "Wayman Good Hope", address: "100 Hoyle Lane, Severna Park, MD 21146", hours: "Call", days: "", county: "Anne Arundel"},
+            {name: "YMCA of Annapolis", address: "1517 Ritchie Hwy, Arnold, MD 21012", hours: "2:30pm-5:30pm", days: "Tue-Thu", county: "Anne Arundel"},
+            {name: "Wilson Memorial Church", address: "Rt. 3 North, Gambrills, MD 21054", hours: "9am-12pm", days: "Mon", county: "Anne Arundel"},
             
-            // Baltimore City (sample - adding key locations)
+            // BALTIMORE CITY
+            {name: "Abundant Life I", address: "3915 Callaway Ave., Baltimore, MD 21215", hours: "9am-12pm", days: "Mon", county: "Baltimore City"},
+            {name: "Abundant life II", address: "5110 Balto Natl. Pike apt 4, Baltimore, MD 21229", hours: "9am-12pm", days: "Mon", county: "Baltimore City"},
+            {name: "Adams Chapel AME", address: "3813 Egerton Rd., Baltimore, MD 21215", hours: "11am-1pm", days: "Wed, Sat", county: "Baltimore City"},
+            {name: "Agape House", address: "222 N. Carrollton Ave., Baltimore, MD 21223", hours: "12pm-6pm", days: "Wed, Sat", county: "Baltimore City"},
+            {name: "AMES Memorial AME", address: "615 Baker St., Baltimore, MD 21217", hours: "11am-1pm", days: "Tue", county: "Baltimore City"},
+            {name: "Bethany Baptist Church", address: "2616 Ridgeley St., Baltimore, MD 21230", hours: "9am-12pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Bethel Church of God", address: "301 W. 28th Street, Baltimore, MD 21211", hours: "9am-12pm, 12pm-3pm", days: "Fri, Sun", county: "Baltimore City"},
+            {name: "Brothers Praise Him", address: "1000 West Saratoga St., Baltimore, MD 21229", hours: "12pm-2pm", days: "Tue, Thu", county: "Baltimore City"},
+            {name: "Carter Memorial Emergency", address: "745 West Fayette St., Baltimore, MD 21201", hours: "10am-2pm", days: "Thu", county: "Baltimore City"},
+            {name: "Central Baptist Church", address: "2035 West Baltimore St., Baltimore, MD 21223", hours: "12pm-2pm", days: "Sat", county: "Baltimore City"},
+            {name: "Chase House", address: "1027 Cathedral St., Baltimore, MD 21201", hours: "10am-2pm", days: "Fri", county: "Baltimore City"},
+            {name: "Cherry Hill UMC", address: "3225 Round Rd., Baltimore, MD 21225", hours: "6pm-8pm, 10am-2:30pm", days: "Tue, Sat", county: "Baltimore City"},
+            {name: "Christ Commission Church", address: "2924 Erdman Ave., Baltimore, MD 21213", hours: "12pm-3pm", days: "Sat", county: "Baltimore City"},
+            {name: "Christ Deliverance Church", address: "711 Walnut Ave., Baltimore, MD 21229", hours: "12pm-6pm", days: "M, W, F, S", county: "Baltimore City"},
+            {name: "Christian Memorial Church", address: "2001 West North Ave., Baltimore, MD 21217", hours: "10am-12pm", days: "Sat", county: "Baltimore City"},
+            {name: "Church Of Jesus Christ", address: "2880 Hillen Road, Baltimore, MD 21218", hours: "10am-3pm", days: "Mon, Thu", county: "Baltimore City"},
+            {name: "Claremont Homes", address: "4312 Clareway, Baltimore, MD 21213", hours: "10am-2pm", days: "Mon, Wed, Fri", county: "Baltimore City"},
+            {name: "Concord Baptist Church", address: "5204 Liberty Heights Ave., Baltimore, MD 21207", hours: "10am-11:30am", days: "4th Sat", county: "Baltimore City"},
+            {name: "Corpus Christi", address: "703 Whitelock St., Baltimore, MD 21217", hours: "1:30pm-3pm", days: "Thu", county: "Baltimore City"},
+            {name: "Deliverance Manna", address: "3538 Old York Road, Baltimore, MD 21218", hours: "6pm-8pm, 10am-12pm", days: "Thu, Sat", county: "Baltimore City"},
+            {name: "Dept. of Housing Neighborhood", address: "22 S. Calhoun, Baltimore, MD 21223", hours: "10am-3pm", days: "Mon", county: "Baltimore City"},
+            {name: "Donald Bentley Food Pantry", address: "2405 Loch Raven Blvd., Baltimore MD 21218", hours: "9am-12:30pm", days: "Sat", county: "Baltimore City"},
+            {name: "Doswell Cathedral", address: "520 Doswell Ave., Baltimore, MD 21223", hours: "1pm-4pm", days: "Tue, Thu", county: "Baltimore City"},
+            {name: "Dukeland Development", address: "1601 Gertrude St., Baltimore, MD 21216", hours: "12pm-8pm", days: "Mon, Fri", county: "Baltimore City"},
+            {name: "East Baltimore Church of God", address: "2043 E. Baltimore St., Baltimore MD 212131", hours: "10am-3pm", days: "Sat, Sun", county: "Baltimore City"},
+            {name: "Emergency Food Relief Fund", address: "1401 Pennsylvania Ave., Baltimore MD 21217", hours: "11:30am-1pm", days: "Wed", county: "Baltimore City"},
+            {name: "First Apostolic Faith Church", address: "27 S. Caroline St., Baltimore, MD 21231", hours: "2:30pm-4:30pm", days: "Sat", county: "Baltimore City"},
+            {name: "First Charity Baptist Church", address: "611 N. Aisquith St. Baltimore, MD 21202", hours: "11am-3pm", days: "Fri-Sun", county: "Baltimore City"},
+            {name: "First Emmanuel Baptist Church", address: "2209 Park Ave, Baltimore, MD 21217", hours: "12pm-3pm", days: "Tue, Thu", county: "Baltimore City"},
+            {name: "First Philadelphia Baptist", address: "2120 Greenmount Ave., Baltimore, MD 21218", hours: "10:30am-12:30pm", days: "Thu-Fri", county: "Baltimore City"},
             {name: "Franciscan Center, Inc.", address: "2212 Maryland Ave., Baltimore, MD 21218", hours: "10am-2pm", days: "Mon-Fri", county: "Baltimore City"},
-            {name: "Our Daily Bread", address: "19 W. Franklin St., Baltimore, MD 21201", hours: "Various", days: "Everyday", county: "Baltimore City"},
+            {name: "Gillis Memorial", address: "4016 Park Heights Ave., Baltimore MD 21215", hours: "9am-1pm", days: "Mon, Wed, Fri", county: "Baltimore City"},
+            {name: "God's Time Ministry", address: "1014 N. Carrollton Ave., Baltimore MD 21217", hours: "12pm-2pm", days: "Sat", county: "Baltimore City"},
+            {name: "Gospel Messenger", address: "2610 Keyworth Ave., Baltimore, MD 21215", hours: "9am-1pm", days: "Thu", county: "Baltimore City"},
+            {name: "Gospel Tabernacle", address: "3100 Walbrook Ave., Baltimore, MD 21216", hours: "11am-3pm", days: "Sun, Mon, Fri", county: "Baltimore City"},
+            {name: "Grace Memorial", address: "1100 N. Eden St., Baltimore, MD 21213", hours: "12pm-1:30pm", days: "Tue", county: "Baltimore City"},
+            {name: "Greater Zion Church", address: "301 No. Gilmore Ave., Baltimore, MD 21223", hours: "1pm-4pm", days: "Wed, Fri", county: "Baltimore City"},
+            {name: "Greenhill Apts.", address: "2501 Violet Ave, #710 N., Baltimore, MD 21215", hours: "10am-12pm", days: "Wed", county: "Baltimore City"},
+            {name: "Hampden UMC", address: "3449 Falls Rd., Baltimore, MD 21211", hours: "9am-12pm", days: "Mon, Wed", county: "Baltimore City"},
+            {name: "Harford Senior Center", address: "4920 Harford Rd., Baltimore, MD 21214", hours: "10am-2pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Harvest Christian", address: "2601 Pennsylvania Ave., Baltimore, MD 21217", hours: "10am-12pm", days: "Wed", county: "Baltimore City"},
+            {name: "Harvey Johnson Towers", address: "1510 WE. Mosher St., Baltimore, MD 21217", hours: "9am-2pm", days: "Sat", county: "Baltimore City"},
+            {name: "Healthy Start", address: "610 N. Chester St., Baltimore, MD 21205", hours: "8:30am-4:30pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Healthy Start", address: "1622 N. Carey St., Baltimore, MD 21217", hours: "8:30am-4:30pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Helping Hands Food Pantry", address: "1911 Belair Rd., Baltimore, MD 21213", hours: "9am-1pm", days: "Sat", county: "Baltimore City"},
+            {name: "Homestead UMC", address: "1500 Gorsuch Ave., Baltimore, MD 21218", hours: "11:30am-2pm", days: "Tue", county: "Baltimore City"},
+            {name: "Household of Faith Missionary", address: "4811 Belair Rd., Baltimore, MD 21206", hours: "12pm-2pm", days: "Sat", county: "Baltimore City"},
+            {name: "Human services Division-4th", address: "1133 Pennsylvania Ave., Baltimore, MD 21201", hours: "9am-3pm", days: "Tue-Fri", county: "Baltimore City"},
+            {name: "Israel Baptist Outreach", address: "1211 N. Chester St., Baltimore, MD 21213", hours: "11am-2pm, 5pm-7pm", days: "Mon, Tue, Thu, Wed, Fri", county: "Baltimore City"},
+            {name: "JB Outreach Ministries", address: "301 N. Stricker St., Baltimore, MD 21223", hours: "10am-2pm", days: "2nd & 4th Thu", county: "Baltimore City"},
+            {name: "Johnston Square Community Development", address: "841 E. Chase St., Baltimore, MD 21202", hours: "1pm-4pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Judah Worship Center", address: "2000 Frederick Ave., Baltimore, MD 21223", hours: "10am-2pm", days: "Wed, Sat", county: "Baltimore City"},
+            {name: "Lexington Poe", address: "206 N. Fremont Ave., Baltimore, MD 21201", hours: "9am-3pm", days: "Tue-Fri", county: "Baltimore City"},
+            {name: "Love of God", address: "3216 W. Baltimore St., Baltimore, MD 21229", hours: "11am-2pm", days: "Wed", county: "Baltimore City"},
+            {name: "Macedonia Baptist Church", address: "718 W. Lafayette St., Baltimore, MD 21217", hours: "10am-2pm", days: "Tue", county: "Baltimore City"},
+            {name: "Manna Ministry of Greater Gethsemane", address: "2511 E. Preston St., Baltimore, MD 21213", hours: "10am-12pm", days: "Thu", county: "Baltimore City"},
+            {name: "Maryland Church of God", address: "5100 Denmore Ave., Baltimore, MD 21215", hours: "12pm-5pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Mason Memorial", address: "2608 Frederick Ave., Baltimore, MD 21223", hours: "9am-12pm", days: "Wed", county: "Baltimore City"},
+            {name: "Metropolitan Church Pantry", address: "4815 Eastern Ave., Baltimore, MD 21224", hours: "9am-10am", days: "Sat", county: "Baltimore City"},
+            {name: "Mount Moriah Baptist Church", address: "2201 Garrison Blvd., Baltimore, MD 21216", hours: "8:30am-12:30pm", days: "Mon", county: "Baltimore City"},
+            {name: "Mount Olive Holy Evangelistic", address: "3816 Edmonson Ave., Baltimore, MD 21229", hours: "11:30am-2:30pm", days: "Mon", county: "Baltimore City"},
+            {name: "Mt. Calvary Holy Temple", address: "1911 Bloomingdale Rd., Baltimore, MD 21216", hours: "1pm-6pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Mt. Lebanon Baptist Church", address: "2812 Reisterstown Rd., Baltimore, MD 21215", hours: "10am-12pm", days: "Wed, Sat", county: "Baltimore City"},
+            {name: "Mt. Oliver Missionary", address: "513 E. 36th Street, Baltimore, MD 21218", hours: "10am-2pm", days: "Tue", county: "Baltimore City"},
+            {name: "Mt. Calvary Star Baptist Church", address: "1725 N. Milton Ave., Baltimore, MD 21213", hours: "11am-2pm", days: "Sat, Sun", county: "Baltimore City"},
+            {name: "New Bethel Bible Church", address: "710 Poplar Grove St., Baltimore, MD 21216", hours: "10am-2pm", days: "Thu", county: "Baltimore City"},
+            {name: "New Fellowship Christian Community", address: "5202 Park Heights Ave., Baltimore, MD 21215", hours: "9am-12:30pm", days: "Wed", county: "Baltimore City"},
+            {name: "New Friendship Baptist", address: "1515 E. Eager St., Baltimore, MD 21205", hours: "11am-1pm, 9am-11am", days: "Mon, Tue, Thu", county: "Baltimore City"},
+            {name: "New Gabriel Baptist Church", address: "1041 Wilmington Ave., Baltimore, MD 21223", hours: "8am-12pm", days: "Sun", county: "Baltimore City"},
+            {name: "New Hope Church of God", address: "6601 Cleveland Ave., Baltimore, MD 21224", hours: "10am-6pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "New Life Evangelical Baptist", address: "2417 E. North Ave., Baltimore, MD 21213", hours: "9am-4pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "New Mount Zion Baptist Church", address: "817 N. Mount St., Baltimore, MD 21217", hours: "10am-12pm", days: "Wed-Sat", county: "Baltimore City"},
+            {name: "New Rose of Sharon Baptist Church", address: "2 N. Carey St., Baltimore, MD 21223", hours: "10am-1pm", days: "Tue", county: "Baltimore City"},
+            {name: "New Shiloh Baptist Church", address: "2100 N. Monroe St., Baltimore, MD 21217", hours: "1pm-2pm", days: "Sat", county: "Baltimore City"},
+            {name: "New Tabernacle", address: "300 S. Patterson Park Ave., Baltimore, MD 21231", hours: "11am-1pm", days: "Sat", county: "Baltimore City"},
+            {name: "New Temple", address: "1101 N. Dukeland St., Baltimore, MD 21216", hours: "Call", days: "", county: "Baltimore City"},
+            {name: "North Baltimore CARES", address: "5502 York Rd., Baltimore, MD 21212", hours: "9am-11am", days: "Mon, Thu", county: "Baltimore City"},
+            {name: "Paris Domicilary", address: "1024 W. Cross St., Baltimore, MD 21230", hours: "9am-4pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Park Heights Community Center", address: "4917 Park Heights Ave., Baltimore, MD 21215", hours: "10am-4pm", days: "Mon-Fri", county: "Baltimore City"},
             {name: "Paul's Place Outreach Center", address: "1118 Ward St., Baltimore, MD 21230", hours: "8:30am-11am", days: "Mon-Fri", county: "Baltimore City"},
-            {name: "Manna House", address: "435 E 25th St., Baltimore, MD 21218", hours: "8:30am-10:30am", days: "Mon-Fri", county: "Baltimore City"},
-            {name: "Maryland Food Bank", address: "2200 Halethorpe Farms Rd., Baltimore, MD 21227", hours: "9am-4pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Payne Memorial Church", address: "1714 Madison Ave., Baltimore, MD 21216", hours: "10am-2pm", days: "Mon, Tue, Wed, Thu", county: "Baltimore City"},
+            {name: "People's Church of Baltimore", address: "230 N. Fulton Ave., Baltimore, MD 21223", hours: "9am-12pm", days: "Sat", county: "Baltimore City"},
+            {name: "Perkins Square Baptist Church", address: "2500 Edmondson Ave., Baltimore, MD 21223", hours: "2pm-5pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Pillar of Truth", address: "2522 Greenmount Ave., Baltimore, MD 21218", hours: "9am-5pm", days: "Mon-Sat", county: "Baltimore City"},
+            {name: "Pitts Outreach", address: "1142 N. Fulton Ave., Baltimore, MD 21217", hours: "2:30pm-3pm", days: "Wed, Thu", county: "Baltimore City"},
+            {name: "Pleasant Grove Food", address: "214 S. Loudon Ave., Baltimore, MD 21229", hours: "10am-2pm", days: "Mon, Thu", county: "Baltimore City"},
+            {name: "Pleasant View Gardens", address: "201 N. Aisquith St., Baltimore, MD 21202", hours: "10am-2pm", days: "Fri", county: "Baltimore City"},
+            {name: "Poppleton Co-op", address: "838 W. Fairmont Ave., Baltimore, MD 21201", hours: "11am-3pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Prisoners Aid", address: "204 25th Street, Baltimore, MD 21218", hours: "10am-6pm", days: "Wed", county: "Baltimore City"},
+            {name: "Quality of Life Corp", address: "2630 Harford Rd., Baltimore, MD 21218", hours: "10am-2pm", days: "Mon, Thu", county: "Baltimore City"},
+            {name: "Redemporist Fathers", address: "901 E. Eager St., Baltimore, MD 21202", hours: "9:30am-11:30am", days: "Tue, Wed, Thu", county: "Baltimore City"},
+            {name: "Refuge Way of Cross Church", address: "4301 Old York Rd., Baltimore, MD 21212", hours: "12pm-2pm", days: "Wed", county: "Baltimore City"},
+            {name: "Royal Light Outreach", address: "1562 N, Fulton Ave., Baltimore, MD 21217", hours: "11am-1pm", days: "Tue, Thu", county: "Baltimore City"},
+            {name: "Salvation Army", address: "814 Light St., Baltimore, MD 21230", hours: "8:30am-12pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Sharon Baptist", address: "1373 N. Stricker St., Baltimore, MD 21217", hours: "10am-12pm", days: "3rd Sat", county: "Baltimore City"},
+            {name: "Solomon Temple Baptist Church", address: "1738 Appleton Street, Baltimore, MD 21217", hours: "10am-2pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "South Baltimore Emergency", address: "110 E. West St. Baltimore, MD 21230", hours: "10am-1pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Southeast Neighborhood Service Center", address: "3411 Bank St., Baltimore, MD 21224", hours: "10am-2pm", days: "Mon, Wed, Fri", county: "Baltimore City"},
+            {name: "St. Abraham Baptist Church", address: "1124 W. North Ave., Baltimore, MD 21217", hours: "9:30am-1pm", days: "1st & 3rd Wed", county: "Baltimore City"},
+            {name: "St. Ambrose", address: "3445 Park Heights Ave., Baltimore, MD 21215", hours: "9am-4pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "St. Ann Outreach Ctr.", address: "528 E. 22nd St., Baltimore, MD 21218", hours: "9am-11am, 8am-12pm", days: "Tue, Sat", county: "Baltimore City"},
+            {name: "St. Bernadines's Catholic", address: "3812 Edmondson Ave., Baltimore, MD 21229", hours: "10am-12pm", days: "Tue, Wed, Thu", county: "Baltimore City"},
+            {name: "St. Elizabeth Food Pantry", address: "2 N. Belnord Ave., Baltimore, MD 21224", hours: "11:30am-1:30pm", days: "Tue, Fri", county: "Baltimore City"},
+            {name: "St. Gregory the Great", address: "1542 N. Gilmore St., Baltimore MD 21217", hours: "10am-2pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "St. Luke Temple", address: "1821 N. Smallwood Street, Baltimore, MD 21217", hours: "5pm-9pm, 7pm-9pm", days: "Tue, Fri", county: "Baltimore City"},
+            {name: "St. Mark's UMC/Bread of Life", address: "3900 Liberty Heights Ave., Baltimore, MD 21207", hours: "5:30pm-7pm", days: "Wed, Fri", county: "Baltimore City"},
+            {name: "St. Micheal Outreach", address: "1922 E. Lombard St., Baltimore, MD 21231", hours: "9am-12pm", days: "Tue, Wed, Thu", county: "Baltimore City"},
+            {name: "St. Paul Baptist Church", address: "3101 The Alameda, Baltimore, MD 21218", hours: "10am-2pm, 10-2pm/5pm-7pm", days: "Mon, Thu", county: "Baltimore City"},
+            {name: "St. Vincent's Emergency Services", address: "120 N. Front St., Baltimore, MD 21202", hours: "12:30pm-2pm", days: "Mon", county: "Baltimore City"},
+            {name: "St. Wenceslaus", address: "2100 E. Madison St., Baltimore, MD 21205", hours: "11am-1pm", days: "Wed, Thu", county: "Baltimore City"},
+            {name: "Temple House", address: "812 N. Fulton Ave., Baltimore, MD 21217", hours: "10am-12pm", days: "Tue, Sat", county: "Baltimore City"},
+            {name: "The Tree of Life Bible Church", address: "516 N. Schroeder St., Baltimore, MD 21223", hours: "3pm-7pm", days: "Tue", county: "Baltimore City"},
+            {name: "Total Man Outreach", address: "1116 N. Gilmore St., Baltimore, MD 21217", hours: "10am-12pm", days: "Sat", county: "Baltimore City"},
+            {name: "Trinity AME Church", address: "2140 E. Hoffman St., Baltimore, MD 21213", hours: "11am-1pm", days: "Thu", county: "Baltimore City"},
+            {name: "Trinity Apostolic Faith", address: "3600 N. Rogers Ave., Baltimore, MD 21207", hours: "9:30am-12pm", days: "Sun", county: "Baltimore City"},
+            {name: "United House of Prayer", address: "3401 Edgewood Rd., Baltimore, MD 21215", hours: "9am-6pm", days: "Sat, Sun", county: "Baltimore City"},
+            {name: "Unity UMC Church", address: "1433 Edmonson Ave., Baltimore, MD 21223", hours: "10am-12pm", days: "Thu, Fri", county: "Baltimore City"},
+            {name: "Walker Co-Op", address: "1 Cooperative Dr., Baltimore, MD 21212", hours: "10am-12pm", days: "Tue", county: "Baltimore City"},
+            {name: "Washington Village", address: "904 Washington Blvd., Baltimore, MD 21230", hours: "9am-5pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Wayland Baptist Church", address: "3200 Garrison Blvd., Baltimore, MD 21216", hours: "10am-12pm", days: "Mon, Tue", county: "Baltimore City"},
+            {name: "Whitestone Baptist Church", address: "3001 Baker St., Baltimore, MD 21216", hours: "11:30am-1pm", days: "Wed", county: "Baltimore City"},
+            {name: "Wyman House Pantry", address: "123 West 29th St., Baltimore, MD 21218", hours: "12pm-8pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Xemra Pantry", address: "101 E 22nd Street, Baltimore, MD 21218", hours: "10am-2pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Zion Baptist Church", address: "1700 N Caroline St., Baltimore, MD 21213", hours: "9:30am-12pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Zion Outreach Services Inc.", address: "1221 Argyle Ave., Baltimore, MD 21217", hours: "11-1:30pm", days: "Tue, Thu", county: "Baltimore City"},
             
-            // Baltimore County
-            {name: "Community Assistance Network Inc", address: "7701 Dunmanway, Dundalk MD 21222", hours: "9:30am-11:30am, 1:30pm-3:30pm", days: "Mon-Fri", county: "Baltimore County"},
+            // BALTIMORE COUNTY
+            {name: "Alliance Inc", address: "9201 Philadelphia Rd., Balto., MD 21237", hours: "8:30am-5pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Back River United Methodist", address: "544 Back River Neck Rd., Baltimore, MD 21221", hours: "By appointment", days: "", county: "Baltimore County"},
+            {name: "Balto. Co. Dept. of Aging", address: "611 Central Ave., Towson, MD 21204", hours: "Restricted", days: "", county: "Baltimore County"},
+            {name: "Balto. Co. Health Dept. Geriatric Services", address: "1 Investment Pl. 11th Fl., Towson, MD 21204", hours: "8:30am-4:30pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Community Asst. Network Inc", address: "7701 Dunmanway, Dundalk MD 21222", hours: "9:30am-11:30am, 1:30pm-3:30pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Community Crisis Ctr.", address: "725 Main St., Reisterstown, MD 21136", hours: "10am-1pm", days: "Mon-Fri", county: "Baltimore County"},
             {name: "Eastern Interfaith Outreach", address: "531 Eastern Bend, Essex, MD 21221", hours: "10am-2pm", days: "Mon, Wed, Fri", county: "Baltimore County"},
+            {name: "Edgemere Church of God", address: "7414 Ellen Ave., P.O. Box 6686, Balto. MD", hours: "9am-5pm", days: "Sun, Wed, Thu", county: "Baltimore County"},
+            {name: "Essex Utd. Methodist Church", address: "524 Maryland Ave., Balto., MD 21221", hours: "10:30am-12:30pm", days: "Tue, Thu", county: "Baltimore County"},
+            {name: "First Baptist Church of Essex", address: "911 Mace Avenue, Balto., MD 21221", hours: "9am-12noon", days: "Mon-Thu", county: "Baltimore County"},
+            {name: "Friendship Baptist Church", address: "307Â½ Avondale Rd., Balto., MD 21222", hours: "Restricted", days: "", county: "Baltimore County"},
+            {name: "Good Samaritan Ministry Union Bethel AME Church", address: "8615 Church Lane, Randallstown, MD 21133", hours: "Vary by appt.", days: "", county: "Baltimore County"},
+            {name: "Greater St. John BC", address: "103 Carver Road, Baltimore, MD 21222", hours: "Restricted", days: "", county: "Baltimore County"},
+            {name: "Helping Hands Food Pantry", address: "7901 Bradshaw Rd., P.O. Box 192, Upper Falls, MD 21156", hours: "9am-12noon", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Hopkins Village", address: "3 Brett Court, Balto., MD 21212", hours: "Restricted", days: "", county: "Baltimore County"},
+            {name: "Key Point Health Services Inc", address: "7701 Dunmanway, Baltimore, MD 21222", hours: "Vary", days: "Vary", county: "Baltimore County"},
+            {name: "Ironworkers-Local #16 Union Hall", address: "2008 Merrin Ave., Balto., MD 21222", hours: "7am-4pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "J & C Unity Christian Church", address: "101 Back Riverneck Rd., Balto., MD 21221", hours: "Vary", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Kingsley Park Apts.", address: "1600 Gail Rd., #1, Balto., MD 21221", hours: "9am-5:30pm", days: "Mon-Fri", county: "Baltimore County"},
             {name: "The Liberty Assistance Ctr.", address: "9019 Liberty Rd., Randallstown, MD 21113", hours: "10am-2pm", days: "Mon, Wed, Thu, Fri", county: "Baltimore County"},
+            {name: "Morning Star Baptist Church Food Pantry", address: "154 Winters Ave., Balto., MD 21228", hours: "9am-1pm", days: "Mon, Wed, Fri", county: "Baltimore County"},
+            {name: "Mount Olive Baptist Church", address: "651 Mount Olive Rd., Balto., MD 21222", hours: "10am-5pm", days: "Sun-Sat", county: "Baltimore County"},
+            {name: "Mount Olivet UM Church", address: "823 Edmondson Ave., Catonsville, MD 21228", hours: "Vary", days: "Tue, Thu, Sat", county: "Baltimore County"},
+            {name: "New Horizon Baptist Church", address: "2200 St. Luke Lane, Baltimore, MD 21207", hours: "8am-4pm", days: "Sat", county: "Baltimore County"},
+            {name: "New Macedonia Bapt. Church", address: "6930 Liberty Rd, Balto. MD 21207", hours: "9am-6pm, 7pm-10pm, 1pm-6pm", days: "Sun, Wed, Sat", county: "Baltimore County"},
+            {name: "Our Lady Queen of Peace Ch.", address: "10003 Bird River Rd., Balto., MD 21220", hours: "9am-3pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Perry Hall United Meth. Ch.", address: "9515 Belair Rd., Balto., MD 21236-1599", hours: "9am-5pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Rising Sun Food Pantry", address: "2211 St. Lukes Lane", hours: "Call", days: "Sat, Sun", county: "Baltimore County"},
+            {name: "Rock of Ages Church of God", address: "310 South Marlyn Ave., Baltimore, MD 21221", hours: "9am-2pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Shining Star", address: "111832 Eastern Ave., Baltimore, MD 21220", hours: "10am-2pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "St. Luke's Lutheran Church", address: "1803 Dundalk Ave., Balto., MD 21222", hours: "9am-2pm", days: "Tue, Thu, Fri", county: "Baltimore County"},
+            {name: "St. Luke's United Meth. Ch.", address: "2119 Gwynn Oak Ave., Woodlawn, MD 21207", hours: "9am-12noon", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "St. Peter Ev. Luth. Church", address: "7834 Eastern Blvd., Balto., MD 21224", hours: "9am-1pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "St. Stephen's AME Church", address: "1601 Old Eastern Ave., Baltimore, MD 21221", hours: "Varies", days: "", county: "Baltimore County"},
+            {name: "Southwest Emergency Svcs.", address: "1201 Maple Ave., Balto., MD 21227", hours: "9am-12noon, 6pm-8pm", days: "Mon-Fri, 1st Wed", county: "Baltimore County"},
+            {name: "Towson United Methodist Church", address: "501 Hampton Ln., Towson, MD 21286", hours: "6pm-7:30pm", days: "last Thu", county: "Baltimore County"},
             
-            // Carroll County
+            // CALVERT COUNTY
+            {name: "Calvert Churches Community", address: "3800 Old Town Road, Huntingtown, MD 20639", hours: "10am-1pm", days: "Tue, Wed", county: "Calvert"},
+            {name: "Catholic Charities", address: "P.O. Box 779, Prince Frederick MD 20678", hours: "9am-4:30pm", days: "Mon-Fri", county: "Calvert"},
+            {name: "Dept. of Social Services", address: "200 Duke St. Prince Frederick MD 20678", hours: "8am-5pm", days: "Mon-Fri", county: "Calvert"},
+            {name: "Emmanual Seventh Day Adventist", address: "SMILE P.O. Box 1276, Solomons, MD 20688", hours: "10am-2pm, 10am-12pm", days: "Wed, Thu, Sat", county: "Calvert"},
+            {name: "St. Anthony's Ladies of Charity", address: "8820 Chesapeake Ave., P.O. Box 660 North Beach, MD 20614", hours: "12noon-2pm", days: "Tue", county: "Calvert"},
+            
+            // CAROLINE COUNTY
+            {name: "St. Martin's Barn", address: "14376 Benedictine Lane Ridgely, MD 21660", hours: "8:30am-12pm, 6pm-8pm", days: "Tue, Fri, Wed, Mon & Thu", county: "Caroline"},
+            
+            // CARROLL COUNTY
             {name: "Westminster Food Bank", address: "10 Distillery Dr., P.O. Box 2160, Westminster, MD 21158", hours: "10am-11:15am, 1pm-2:15pm, 9am-12noon", days: "Tue-Thu, Sat", county: "Carroll"},
+            {name: "Sykesville/Eldersburgh Food Bank", address: "915 Liberty Rd., Eldersburgh, MD 21784", hours: "10am-1:00pm", days: "Wed", county: "Carroll"},
+            {name: "Taneytown Food Bank", address: "44 Frederick Street, Taneytown, MD 21787", hours: "9:30am-11:15am", days: "Thur", county: "Carroll"},
             
-            // Frederick County
+            // CECIL COUNTY
+            {name: "Blythedale 7th Day Adventist Church", address: "48 Blythedale Rd., Perryville, MD 21903", hours: "", days: "", county: "Cecil"},
+            {name: "Cecil County Help Center", address: "135 E. High St., Elkton, MD 21921", hours: "7:30am-4:30pm", days: "Mon-Fri", county: "Cecil"},
+            {name: "Chesapeake Care", address: "80 Marysville Rd., North East, MD 21901", hours: "", days: "", county: "Cecil"},
+            {name: "Clairvaux Farm Meeting Ground", address: "P.O. Box 808, Elkton, MD 21922", hours: "9am-4pm", days: "Mon-Fri", county: "Cecil"},
+            {name: "First Baptist Ch. of NorthEast", address: "206 Mechanics Valley Rd., N.E., MD 21921", hours: "9am-4pm", days: "Mon-Fri", county: "Cecil"},
+            {name: "Good Sheperd Church", address: "810 Aiken Ave., Perryville MD 21903", hours: "", days: "", county: "Cecil"},
+            {name: "Immaculate Conception Outreach", address: "P.O. Box 345, Elkton, MD 21922", hours: "", days: "", county: "Cecil"},
+            {name: "Ray of Hope Mission Center", address: "2084-C Tome Hway., Port Deposit, MD 21901", hours: "9am-4pm", days: "Mon-Fri", county: "Cecil"},
+            
+            // CHARLES COUNTY
+            {name: "Calvary United Methodist", address: "3235 Leonardtown Rd., Waldorf, MD 20601", hours: "10am-4pm", days: "Tue & Fri", county: "Charles"},
+            {name: "St. Mary's Star of the Sea", address: "30 Mattingly Ave., Indian Head, MD 20640", hours: "9am-11am", days: "1 Sat, per mt.", county: "Charles"},
+            {name: "Assoc. Catholic Charities", address: "513 E. Charles St., La Plata, MD 20646", hours: "9am-5pm, 12pm-9pm", days: "M, W, Th, F, Tu", county: "Charles"},
+            {name: "Zion Wesley Utd. Methodist", address: "Rt. 228, P.O Box 972, Waldorf, MD 20604", hours: "8am-11am", days: "3rd Sat. of mt.", county: "Charles"},
+            {name: "Free Will Baptist", address: "4028 Old Washington Rd., Waldorf, MD 20602", hours: "9:30am-1pm", days: "last Sat. of mt.", county: "Charles"},
+            {name: "St. Peter's St. Vincent dePaul", address: "3220 St. Peter's Drive, Waldorf, MD 20601", hours: "8am-4:30", days: "Mon-Sat", county: "Charles"},
+            {name: "Children's Aid Society", address: "3000 Huntington Circle, Waldorf, MD 20602", hours: "9am-4:30pm", days: "Mon-Fri", county: "Charles"},
+            
+            // DORCHESTER COUNTY
+            {name: "Dorchester Community Development Corporation", address: "435 High St., P.O. Box 549, Cambridge, MD 21613", hours: "9am-4pm", days: "Mon-Fri", county: "Dorchester"},
+            
+            // FREDERICK COUNTY
+            {name: "Brunswick Food Bank", address: "7S. Maryland Ave., Brunswick, MD", hours: "6:30pm-8pm", days: "Thu", county: "Frederick"},
+            {name: "Emmitsburg Food Bank", address: "300 S. Seton Ave., Emmitsburg, MD 21727", hours: "10am-12noon", days: "Thu", county: "Frederick"},
             {name: "Frederick Community Action Council", address: "100 S. Market Street, Frederick, MD 21701", hours: "2pm-4pm, 7pm-9pm", days: "M, T, Th, F, Wed", county: "Frederick"},
+            {name: "Jefferson Food Bank", address: "3864 Jefferson Pike, Jefferson, MD 21755", hours: "10am-11:30am", days: "1st & 3rd Sat", county: "Frederick"},
+            {name: "Middletown Food Bank", address: "301 W. Main St., Community Building Middletown, MD 21769", hours: "1pm-3pm, 12pm-2pm", days: "Wed, Fri", county: "Frederick"},
+            {name: "Thermont Food Bank", address: "Apples Church Road, Thurmont, MD 21788", hours: "6pm-8pm, 12pm-2pm", days: "Tue, Fri", county: "Frederick"},
+            {name: "Walkersville Food Bank", address: "21 West Frederick St., Walkersville, MD 21231", hours: "6:30pm-8:30pm, 10am-4pm", days: "Mon, Thu", county: "Frederick"},
             
-            // Harford County
+            // HARFORD COUNTY
+            {name: "AME Refuge Temple Church", address: "116 Spesutia Rd., Aberdeen, MD 21001", hours: "Call", days: "Call", county: "Harford"},
+            {name: "Bread of life", address: "3716 Dublin Rd., Darlington, MD 21034", hours: "", days: "Sundays", county: "Harford"},
+            {name: "Care Night", address: "1918 High Point Rd., Forest Hill, 21050", hours: "", days: "Evenings Monday", county: "Harford"},
             {name: "Community Action Agency", address: "33 W. Courtland St., Bel Air, MD 21014", hours: "8:30am-4:30pm", days: "Mon-Fri", county: "Harford"},
+            {name: "Fish-St. Paul's Lutheran Ch.", address: "428 Battery Drive, Havre de Grace, MD 21078", hours: "On-call", days: "Daily", county: "Harford"},
+            {name: "Fish-Bel Air Calvary Baptist", address: "206 E. Courtland St., Bel Air, MD 21014", hours: "Call", days: "Daily", county: "Harford"},
+            {name: "Grove Presbyterian Church", address: "50 East Belair Ave., Aberdeen, MD 21001", hours: "7:30pm-8:30pm", days: "Wed", county: "Harford"},
             {name: "Manna House-Bel Air United Methodist Church", address: "21 Linwood Ave., Bel Air, MD 21014", hours: "11:30am-1pm", days: "Wed", county: "Harford"},
+            {name: "Mason Dickson", address: "708 Highland Rd. PO Box 34, MD 21014", hours: "9:30am-12:30pm", days: "Mon-Thu", county: "Harford"},
+            {name: "N.I.N. Sr. Baskets", address: "21 Linwood Ave., Bel Air, MD 21014", hours: "", days: "4th Thu", county: "Harford"},
+            {name: "Neighbors In Need", address: "29 W. Courtland St, Bel Air, MD 21014", hours: "Holiday Program", days: "", county: "Harford"},
             {name: "Salvation Army", address: "300 Rear Seneca Ave., Havre de Grace, MD 21078", hours: "9am-3pm", days: "Mon-Fri", county: "Harford"},
+            {name: "Sharing Table", address: "3479 Albantowne Way, Edgewood, MD 21040", hours: "", days: "Sat", county: "Harford"},
+            {name: "St. Joan of Arc Church", address: "257 Law Street, Aberdeen, MD 21001", hours: "9am-4pm", days: "Mon-Fri", county: "Harford"},
+            {name: "St. Matthew's Church", address: "802 Maxa Rd.", hours: "Call", days: "", county: "Harford"},
+            {name: "Trinity Lutheran Church", address: "1100 Philadelphia Rd., Joppa, MD 21085", hours: "", days: "Thu", county: "Harford"},
             
-            // Howard County
+            // HOWARD COUNTY
+            {name: "Bethany Lane Baptist Church", address: "3030 Bethany Lane, Ellicott City, MD 21042", hours: "Call", days: "", county: "Howard"},
+            {name: "Bethel Assembly of God", address: "P.O. Box 416, Savage, MD 20763", hours: "10am-2pm", days: "Mon-Fri", county: "Howard"},
+            {name: "Bridgeway Community Cupboard", address: "6148 Cedar Wood Dr., Columbia, MD 21044", hours: "Call", days: "", county: "Howard"},
+            {name: "Elkridge Food Pantry", address: "5646 Furnance Ave, Elkridge, MD", hours: "6pm-8pm", days: "4th Friday", county: "Howard"},
+            {name: "First Baptist Church of Savage", address: "Conner of Washington and Woodward Street in Savage", hours: "6:30pm-7:30pm, 9am-11am", days: "Wed, Fri, Sat", county: "Howard"},
             {name: "FISH", address: "P.O. Box 34, Ellicott City, MD 21041", hours: "Call", days: "Mon-Fri", county: "Howard"},
-            {name: "Columbia Community Care", address: "Various locations in Columbia", hours: "Varies", days: "Various", county: "Howard"},
+            {name: "Locust United Methodist Church", address: "Corner of Martin and Freetown Rd.", hours: "", days: "Mon, Wed, Fri, Sat", county: "Howard"},
+            {name: "Long Reach Church of God", address: "6080 Foreland Garth, Columbia, MD", hours: "5:30pm-6pm", days: "Fri", county: "Howard"},
+            {name: "Mt. Pisgah AME Church", address: "5901 Cedar Fern Court, Columbia, MD 21044", hours: "11am-5pm, 10am-2pm", days: "Weekdays, Saturday", county: "Howard"},
+            {name: "St. John's Baptist Church", address: "8910 Old Annapolis Road, RT 100, Columbia, MD 20145", hours: "10am-1pm", days: "3rd Sat", county: "Howard"},
             
-            // Montgomery County
-            {name: "Community Ministries of Montgomery County", address: "114 W. Montgomery Ave., Rockville, MD 20850", hours: "Varies", days: "Various", county: "Montgomery"},
-            {name: "Manna Food Center", address: "9311 Gaither Rd, Gaithersburg, MD 20877", hours: "9am-5pm", days: "Mon-Fri", county: "Montgomery"},
+            // KENT COUNTY
+            {name: "Community Food Pantry", address: "Christ United Methodist Church, Chestertown, MD", hours: "10am-12noon", days: "Tue, Fri", county: "Kent"},
             
-            // Prince George's County
+            // MONTGOMERY COUNTY
+            {name: "ARC of Montgomery County", address: "11600 Nebel St., Rockville, MD 20852", hours: "Group Home", days: "", county: "Montgomery"},
+            {name: "Catholic Charities", address: "1438 Rhode Island Ave., NE Washington DC 20018", hours: "Shelters", days: "", county: "Montgomery"},
+            {name: "Community Ministries of Montgomery County", address: "114 W. Montgomery Ave., Rockville, MD 20850", hours: "Shelter", days: "", county: "Montgomery"},
+            {name: "National Center for Children and Families", address: "6301 Greentree Rd, Bethesda, MD 20817", hours: "Shelter", days: "", county: "Montgomery"},
+            {name: "Community Services for Autistic Adult and Children", address: "751 Twimbrook Parkway, Rockville, MD 20851", hours: "Group Home", days: "", county: "Montgomery"},
+            {name: "Community Supoort Service", address: "204-206 North Adams Street, Rockville, MD 20850", hours: "Group Home", days: "", county: "Montgomery"},
+            {name: "Helping Hands", address: "622 N. Horners Lane, Rockville, MD 20850", hours: "Shelter", days: "", county: "Montgomery"},
+            {name: "Hanna's Aftercare and Rehabilitation Center", address: "1201 Millgrove Road, Silver Spring, MD 20905", hours: "Transitional Home", days: "", county: "Montgomery"},
+            {name: "Head Injury Rehabilitation and Referral Services", address: "One Church St., Suite 102, Rockville, MD 20850", hours: "Group Home", days: "", county: "Montgomery"},
+            {name: "Montgomery County Coalition for the Homeless", address: "600 B East Gude Drive, Rockville, MD 20850", hours: "Shelters", days: "", county: "Montgomery"},
+            {name: "Montgomery Ave. Women's Shelter", address: "12250 Wilkins Ave., Rockville, MD 20850", hours: "Women's Shelter", days: "", county: "Montgomery"},
+            {name: "Outpatient Addiction Services", address: "751 Twimbrook Parkway 2nd Floor, Rockville, MD 20851", hours: "Daytime Shelter", days: "", county: "Montgomery"},
+            {name: "Stepping Stones", address: "P.O. Box 712 Rockville, MD 20848", hours: "Family Shelter", days: "", county: "Montgomery"},
+            {name: "Vanguard Services Unlimited", address: "1 Lawrence Court, Rockville, MD 20850", hours: "Halfway house", days: "", county: "Montgomery"},
+            {name: "Watkins Mill House", address: "20201 Watkins Mill Rd., Gaithersburg, MD 250886", hours: "Women's Shelter", days: "", county: "Montgomery"},
+            {name: "Wells Robertson House", address: "1 Wells Avenue, Gaithersburg, MD 20877", hours: "Shelter", days: "", county: "Montgomery"},
+            
+            // PRINCE GEORGE'S COUNTY
+            {name: "Adventist Community Services", address: "501 Sligo Ave., Silver Springs, MD 20910", hours: "10am-12pm", days: "Mon-Thu", county: "Prince George's"},
+            {name: "Ager Road Methodist", address: "6301 Ager Rd., Hyattsville, MD 20782", hours: "9:30am-11:15am", days: "Thu, by appt.", county: "Prince George's"},
+            {name: "Breath of Life Ministries", address: "5400A Kenilworth Ave., Riverdale, MD 20737", hours: "8am-1pm", days: "Wed", county: "Prince George's"},
             {name: "Community Support Systems", address: "13500 Baden-Westwood Rd., Brandywine, MD 20613", hours: "9:30am-11:30am", days: "Wed, Fri", county: "Prince George's"},
             {name: "First Baptist Church of Suitland", address: "5400 Silver Hill Rd., Suitland, MD 20747", hours: "9am-4pm", days: "Mon-Fri", county: "Prince George's"},
             {name: "Fish of Greater Laurel, Inc.", address: "308 Gorman Ave., Laurel MD 20724", hours: "11am-2pm", days: "Tue, Thu, Sat", county: "Prince George's"},
+            {name: "Church of the Living God", address: "1417 Chilum Rd., Hayattsville, MD 20782", hours: "10am-12pm", days: "Sat", county: "Prince George's"},
+            {name: "G.A. Fitzgerald Community", address: "1250 Benning Rd., Capitol Hgts., MD 20743", hours: "10am-2pm", days: "Mon & Wed", county: "Prince George's"},
+            {name: "Galilee Baptist Church", address: "2101 Shadyside Ave., Suitland, MD 20746", hours: "9:30am-3pm", days: "Mon-Thu", county: "Prince George's"},
+            {name: "Gethsemane United Methodist", address: "901 Addison Rd., Capitol Heights, MD 20743", hours: "10am-1pm", days: "Mon,-Thu", county: "Prince George's"},
+            {name: "Greater Spiritual Fellowship Church", address: "12788-B Old Forth Rd., Forth Washington, MD 20744", hours: "6pm-7pm", days: "2nd Tues", county: "Prince George's"},
+            {name: "Harvest Temple Church of God", address: "6608 Wilkins Place, Forestville, MD", hours: "12pm-2pm", days: "Tue-Thu", county: "Prince George's"},
             {name: "Help By Phone", address: "6100 Westchester Park Dr., College Park, MD 20740", hours: "9am-5pm, 9am-12noon", days: "Mon, Thu, Fri", county: "Prince George's"},
+            {name: "Hunter Memorial AME Church", address: "4719 Silver Hill Rd., Suitland, MD 20746", hours: "On Call", days: "Mon-Fri", county: "Prince George's"},
+            {name: "ICAC/Oxon Hill Food Pantry", address: "4915 St. Barnabas Rd., Temple Hills, MD 20748", hours: "10am-1pm, 6pm-8pm", days: "Tue, Sat, Thu", county: "Prince George's"},
+            {name: "Langley ParkMcCormick E.S-Pantry", address: "8201 15th Avenue, Hyattsville, MD 20783", hours: "2:30-3:30pm", days: "Mon-Fri", county: "Prince George's"},
+            {name: "Laurel Advocacy Referral Services (LARS)", address: "311 Laurel Ave., Laurel MD 20724", hours: "9am-2pm, 6:30pm-9pm", days: "Mon, Wed, Fri, Mon", county: "Prince George's"},
+            {name: "Lucille's Pantry", address: "6100 Jost Street, Fairmont Hgts., MD 20743", hours: "10am-2pm", days: "Wed, Fri", county: "Prince George's"},
+            {name: "Mt Calvary Church", address: "6706 Marlboro Pike, Forestville, MD 20747", hours: "9:30am-11:30am", days: "Mon & Thu", county: "Prince George's"},
+            {name: "Oaklands Presbyterian Church", address: "14301 Laurel-Bowie Rd., Laurel, MD 20706", hours: "9am-2pm", days: "Tue-Fri", county: "Prince George's"},
+            {name: "Pregnancy Aid Center, Inc.", address: "4809 Greenbelt Rd., College Park, MD 20740", hours: "9am-4pm, 9 am-4:30pm, 9am-3pm", days: "Mon, Wed, Tue, Thu, Fri", county: "Prince George's"},
+            {name: "Refreshing Spring Church of God", address: "6201 Riverdale Rd., Riverdale, MD 20737", hours: "12pm-3pm, 9am-11am", days: "Wed, Sat", county: "Prince George's"},
+            {name: "Refuge of Hope Disciple Center", address: "2013â€“D Beaver Rd., Cheverly, MD 20785", hours: "10am-2pm", days: "Mon-Fri", county: "Prince George's"},
+            {name: "Regeneration Development Group", address: "9244 E. Hampton Dr., Suite 514, Capitol Hgts., MD 20743", hours: "10am-1pm", days: "Mon-Fri", county: "Prince George's"},
+            {name: "Sacred Heart Nursery", address: "4805 Queensbury Rd., Riverdale, MD 20737", hours: "Call", days: "nursery/daycare", county: "Prince George's"},
+            {name: "Salvation Army", address: "4825 Edmonston Rd., Hyattsville, MD 20781", hours: "9am-12noon, 1pm-4pm", days: "Mon-Fri", county: "Prince George's"},
+            {name: "Shabach! Food Pantry", address: "2101 Kent Village Dr., Landover MD 20785", hours: "10am-2pm, 10am-2pm", days: "Mon-Fri, 2nd&4th Sat", county: "Prince George's"},
+            {name: "St. Joseph's Church", address: "2020 St. Joseph's Dr., Landover, MD 20785", hours: "1pm-2:30pm", days: "Wed, Sat", county: "Prince George's"},
+            {name: "St. Margaret's Catholic Church", address: "408 Addison Rd., South Seat Pleasant, MD 20743", hours: "9:30am-12noon", days: "Tu, Fri", county: "Prince George's"},
+            {name: "St. Paul United Methodist Church", address: "6634 St. Barnabas Rd., Oxon Hill, MD 20745", hours: "10am-12noon", days: "Mon-Fri", county: "Prince George's"},
+            {name: "United Christian Mission", address: "7808 Marlboro Pike, Forestville, MD 20747", hours: "10am-1pm", days: "Thu", county: "Prince George's"},
+            {name: "United Methodist Church of the Redeem", address: "1901 Iverson St., Temple Hills, MD 20748", hours: "9am-2pm", days: "Mon-Fri", county: "Prince George's"},
+            {name: "United Communities Against Poverty (UCAP)", address: "1400 Doewood Ln., Capitol Hgts., MD 20743", hours: "12:30pm-4:30pm, 8:30am-4:30pm", days: "Mon-Thu, Fri", county: "Prince George's"},
+            {name: "Walker Mill Outreach Center", address: "6974 Walker Mill Rd., Capitol Hgts., MD 20743", hours: "10am-2pm", days: "Thu", county: "Prince George's"},
             
-            // Washington County
-            {name: "Salvation Army", address: "524 West Franklin Street, Hagerstown, MD 21740", hours: "9am-4pm", days: "Mon-Fri", county: "Washington"},
-            {name: "Community Food Bank", address: "601 Washington Ave., Hagerstown, MD 21740", hours: "1pm-3pm", days: "Mon, Tue, Thu, Fri", county: "Washington"},
+            // QUEEN ANNE'S COUNTY
+            {name: "Kent Island Methodist Church", address: "P.O. Box 308, Chester, MD 21619", hours: "9am-11am", days: "Tue, Thu", county: "Queen Anne's"},
+            {name: "Mother of Sorrows Catholic Church", address: "Centerville, MD 21617", hours: "Call", days: "", county: "Queen Anne's"},
+            {name: "Sudlersville Methodist", address: "Sudlersville, MD 21668", hours: "10am-3pm", days: "Tu-Fri", county: "Queen Anne's"},
+            
+            // ST. MARY'S COUNTY
+            {name: "Catholic Charities", address: "21506 Cotton Point Ave., Avenue MD 20609", hours: "9am-5pm, 10am-6pm", days: "M, T, W, F, Thu", county: "St. Mary's"},
+            {name: "HOPE", address: "2161 Grapemills Rd., Lexington Park, MD 20653", hours: "9am-12noon", days: "Mon-Thu", county: "St. Mary's"},
+            {name: "Helping Hands, Inc", address: "P.O. Box 1658, Leonardtown, MD 20650", hours: "10am-2pm", days: "M, W, F", county: "St. Mary's"},
+            {name: "Zion United Methodist", address: "P.O. Box 341, Lexington Park, MD 20653", hours: "5:00pm-7pm", days: "Thu", county: "St. Mary's"},
+            
+            // SOMERSET COUNTY
+            {name: "Christ United Methodist Church", address: "27473 Fairmont Road, Upper Fairmount, MD 21867", hours: "9am-12pm", days: "Sat, 1 per month", county: "Somerset"},
+            {name: "Community Relief Fund", address: "140 Maryland Ave.", hours: "5:30pm-8:30pm", days: "2nd & 4th Wed", county: "Somerset"},
+            {name: "Immanuel United Methodist Church", address: "206 West Main Street, Crisfield, MD 21817", hours: "9am-12pm", days: "2nd & 4th Tue", county: "Somerset"},
+            {name: "Manna House", address: "3453 Lawsonia Road, Crisfield, MD 21817", hours: "1pm-3pm", days: "1st & 3rd Mon", county: "Somerset"},
+            {name: "St. James", address: "8370 Crisfield Highway, Westover, MD 21871", hours: "10am-12pm", days: "3rd & 4th Sat", county: "Somerset"},
+            {name: "Seaton Center", address: "30632 Hampden Ave., Princess Anne, MD 21853", hours: "1pm-4pm", days: "Mon-Fri", county: "Somerset"},
+            
+            // TALBOT COUNTY
+            {name: "Neighborhood Center", address: "126 Port St., Easton, MD 21601", hours: "9am-3pm, 9am-12noon", days: "Mon, Thu, Fri", county: "Talbot"},
+            
+            // WASHINGTON COUNTY
             {name: "Adventist Community Center", address: "50 E. Franklin St., Hagerstown, MD 21740", hours: "10am-3pm", days: "Tue, Thu", county: "Washington"},
+            {name: "Community Action Council", address: "110 Summit Ave., Hagerstown, MD 21740", hours: "8:30am-4:30pm", days: "Mon-Fri", county: "Washington"},
+            {name: "Community Enrichment Coalition", address: "68 W. Church St., Hagerstown, MD 21740", hours: "10am-12pm", days: "Mon, Wed, Fri", county: "Washington"},
+            {name: "Community Food Bank", address: "601 Washington Ave., Hagerstown, MD 21740", hours: "1pm-3pm", days: "Mon, Tue, Thu, Fri", county: "Washington"},
+            {name: "Faith Chapel", address: "14 S. Potomac St., Hagerstown, MD 21740", hours: "10am-3pm", days: "Mon-Fri", county: "Washington"},
+            {name: "Hancock Food Pantry", address: "Pa. Ave. & High St., Hancock, MD", hours: "9am-12noon", days: "Mon-Fri", county: "Washington"},
+            {name: "Office of Consumer Advocacy, Inc.", address: "265 Mill Street, Hagerstown, MD 21740", hours: "As needed", days: "", county: "Washington"},
+            {name: "Raven House", address: "32 East Ave., Hagerstown, MD 21740", hours: "11am-2pm", days: "Tue", county: "Washington"},
+            {name: "SHIP", address: "116 W. High Street, Hancock, MD 21750", hours: "8am-4pm", days: "Mon-Fri", county: "Washington"},
+            {name: "Salvation Army", address: "524 West Franklin Street, Hagerstown, MD 21740", hours: "9am-4pm", days: "Mon-Fri", county: "Washington"},
+            {name: "South County Food Bank", address: "645 S. Main Street, Boonsboro, MD 21713", hours: "11:30am-3pm", days: "Thu", county: "Washington"},
+            {name: "Trinity Food Pantry", address: "15 Randolph Ave., Hagerstown, MD 21740", hours: "10am-2pm", days: "Tue, Wed, Thu", county: "Washington"},
+            {name: "Willamsport Food Bank", address: "35 W. Potomac St., Williamsport, MD 21785", hours: "10am-3pm", days: "Mon, Wed, Fri", county: "Washington"},
             
-            // Wicomico County
+            // WICOMICO COUNTY
+            {name: "Caring & Sharing", address: "2671 Bank Road, Nanticoke, MD 21840", hours: "11am-1pm", days: "Thursday", county: "Wicomico"},
+            {name: "Cathedral of Love", address: "423 Church St., Salisbury, MD 21803", hours: "10am-12pm", days: "Thursday", county: "Wicomico"},
+            {name: "1st Baptist Food Ministry", address: "528 Booth St.,Salisbury, MD 21801", hours: "11am-2pm", days: "1st wed", county: "Wicomico"},
+            {name: "In His Service", address: "6724 Keyes Ln., Salisbury, MD 21804", hours: "Varies", days: "Mon-Fri", county: "Wicomico"},
+            {name: "Joseph House", address: "812 Boundary St., P.O. Box 1755", hours: "9:30am-12noon", days: "Tue, Wed, Thu", county: "Wicomico"},
+            {name: "Lazarus Fund Pantry", address: "608 Riverside Dr., Salisbury, MD", hours: "10am-2pm", days: "Tue", county: "Wicomico"},
+            {name: "New Beginning", address: "612 Dover St., Salisbury, MD 21804", hours: "4pm-6:30pm", days: "Tue", county: "Wicomico"},
+            {name: "Riverside Homes", address: "519 Alabama Ave., Salisbury, MD 21801", hours: "10am-2pm", days: "Mon-Fri", county: "Wicomico"},
+            {name: "R & J Reach Out", address: "1405 Flamingo Dr., Salisbury, MD 21801", hours: "9am-6pm", days: "Mon-Fri", county: "Wicomico"},
             {name: "Salvation Army", address: "407 Oak St., PO Box 3235 Salisbury, MD 21874", hours: "9am-12noon, 1pm-3pm", days: "Mon-Fri", county: "Wicomico"},
-            {name: "Joseph House", address: "812 Boundary St., P.O. Box 1755, Salisbury, MD", hours: "9:30am-12noon", days: "Tue, Wed, Thu", county: "Wicomico"},
+            {name: "Salisbury Evang. Church of Deliverance", address: "1503 West Rd., Salisbury, MD 21801", hours: "", days: "", county: "Wicomico"},
+            {name: "Telamon", address: "237 Florida Ave., Salisbury, MD 21801", hours: "8am-4pm", days: "Mon-Fri", county: "Wicomico"},
+            {name: "Wicomico Family Center", address: "317 Lemmon Hill Lane., Salisbury, MD 21801", hours: "9am-3:30pm", days: "Mon, Tue", county: "Wicomico"},
+            {name: "Wesley Temple", address: "1322 West Rd., Salisbury, MD 21801", hours: "9am-12noon", days: "Mon, Wed, Fri", county: "Wicomico"},
+            {name: "Westside Community Center", address: "20760 Cove Rd., Bivalve, MD 21814", hours: "1pm-4pm", days: "Thu", county: "Wicomico"},
             
-            // Charles County
-            {name: "Catholic Charities", address: "513 E. Charles St., La Plata, MD 20646", hours: "9am-5pm, 12pm-9pm", days: "M, W, Th, F, Tu", county: "Charles"},
-            {name: "Calvary United Methodist", address: "3235 Leonardtown Rd., Waldorf, MD 20601", hours: "10am-4pm", days: "Tue & Fri", county: "Charles"}
+            // WORCESTER COUNTY
+            {name: "Amazing Grace Out reach", address: "7925 Circle Rd., Whaleyville, MD 21872", hours: "Call", days: "", county: "Worcester"},
+            {name: "Diakonia Shelter", address: "12747 Old Bridge Rd., Ocean City, MD 21842", hours: "7am-10pm", days: "Sun-Sat", county: "Worcester"},
+            {name: "Ebenezer Ecumenical Food Pantry", address: "107 Collins St., Snow Hill, MD 21863", hours: "9am-12:30pm", days: "2nd Fri", county: "Worcester"},
+            {name: "Helping Hand Ourtreach Mission", address: "701 Ocean Highway, Pocomoke, MD 21851", hours: "Call", days: "", county: "Worcester"},
+            {name: "P.A.C.E Enterprise Family Food Pantry", address: "5564 Market St., Snow Hill, MD 21863", hours: "Call", days: "call", county: "Worcester"},
+            {name: "Pentecostal Baptist Mission Pantry", address: "512 S. Main St., Berlin, MD 21811", hours: "9am-11:30am, 6pm-8pm", days: "Tue, Wed", county: "Worcester"},
+            {name: "Pocomoke Collaborative", address: "121-123 Willow Street, Pocomoke, MD 21851", hours: "Call", days: "", county: "Worcester"},
+            {name: "Save the Youth Inc.", address: "300 Second St., Pocomoke, MD 21851", hours: "Call", days: "", county: "Worcester"},
+            {name: "Samaritan Ministries, Inc.", address: "814 Fourth St., P.O. Box 661 Pocomoke, MD 21851", hours: "1pm-2pm", days: "M, Tu, W, Sat", county: "Worcester"}
         ];
 
         let userLat = null;
@@ -512,52 +887,364 @@
             }
         }
 
-        // Geocode all pantries (simplified - using approximate coordinates)
-        async function geocodePantries() {
-            // In a production environment, you'd geocode all addresses
-            // For now, using approximate coordinates for major cities
-            const cityCoords = {
-                'Annapolis': {lat: 38.9784, lng: -76.4922},
-                'Baltimore': {lat: 39.2904, lng: -76.6122},
-                'Glen Burnie': {lat: 39.1626, lng: -76.6247},
-                'Severna Park': {lat: 39.0701, lng: -76.5444},
-                'Odenton': {lat: 39.0840, lng: -76.7019},
-                'Crofton': {lat: 39.0018, lng: -76.6869},
-                'Dundalk': {lat: 39.2506, lng: -76.5205},
-                'Essex': {lat: 39.3093, lng: -76.4719},
-                'Randallstown': {lat: 39.3676, lng: -76.7953},
-                'Westminster': {lat: 39.5754, lng: -77.0011},
-                'Frederick': {lat: 39.4143, lng: -77.4105},
-                'Bel Air': {lat: 39.5362, lng: -76.3483},
-                'Havre de Grace': {lat: 39.5493, lng: -76.0916},
-                'Ellicott City': {lat: 39.2673, lng: -76.7983},
-                'Columbia': {lat: 39.2037, lng: -76.8610},
-                'Rockville': {lat: 39.0840, lng: -77.1528},
-                'Gaithersburg': {lat: 39.1434, lng: -77.2014},
-                'Brandywine': {lat: 38.6962, lng: -76.8553},
-                'Suitland': {lat: 38.8487, lng: -76.9275},
-                'Laurel': {lat: 39.0993, lng: -76.8483},
-                'College Park': {lat: 38.9807, lng: -76.9369},
-                'Hagerstown': {lat: 39.6418, lng: -77.7200},
-                'Salisbury': {lat: 38.3607, lng: -75.5994},
-                'La Plata': {lat: 38.5293, lng: -76.9755},
-                'Waldorf': {lat: 38.6265, lng: -76.9394}
-            };
+        // Enhanced geocoding using ZIP code-level precision from maryland_locations_geocoded.csv
+        // Format: 'CITY_ZIPCODE': {lat: X.XXXX, lng: -XX.XXXX}
+        const cityCoords = {
+            // ALLEGANY COUNTY
+            'Cumberland_21502': {lat: 39.6529, lng: -78.7625},
+            'Frostburg_21532': {lat: 39.6584, lng: -78.9286},
+            'Lavale_21502': {lat: 39.6573, lng: -78.8156},
+            'Lavandale_21502': {lat: 39.6529, lng: -78.7625},
+            'Oldtown_21555': {lat: 39.5412, lng: -78.5511},
+            
+            // ANNE ARUNDEL COUNTY
+            'Annapolis_21401': {lat: 38.9784, lng: -76.4922},
+            'Annapolis_21403': {lat: 38.9896, lng: -76.5327},
+            'Arnold_21012': {lat: 39.0365, lng: -76.5019},
+            'Baltimore_21225': {lat: 39.2296, lng: -76.6522},
+            'Bowie_20715': {lat: 38.9426, lng: -76.7302},
+            'Brooklyn_21225': {lat: 39.2296, lng: -76.6522},
+            'Crofton_21114': {lat: 39.0018, lng: -76.6869},
+            'Davidsonville_21035': {lat: 38.9223, lng: -76.6280},
+            'Eastport_21403': {lat: 38.9665, lng: -76.4747},
+            'Edgewater_21037': {lat: 38.9029, lng: -76.5497},
+            'Gambrills_21054': {lat: 39.0676, lng: -76.6633},
+            'Glen Burnie_21061': {lat: 39.1626, lng: -76.6247},
+            'Hanover_21076': {lat: 39.1926, lng: -76.7244},
+            'Harwood_20776': {lat: 38.8573, lng: -76.6105},
+            'Lothian_20711': {lat: 38.8073, lng: -76.6280},
+            'Millersville_21108': {lat: 39.0662, lng: -76.6458},
+            'Odenton_21113': {lat: 39.0840, lng: -76.7019},
+            'Pasadena_21122': {lat: 39.1076, lng: -76.5522},
+            'Severn_21113': {lat: 39.1373, lng: -76.6969},
+            'Severna Park_21146': {lat: 39.0701, lng: -76.5444},
+            'West River_20778': {lat: 38.8262, lng: -76.5347},
+            'Tracys Landing_20779': {lat: 38.7751, lng: -76.5561},
+            
+            // BALTIMORE CITY
+            'Baltimore_21201': {lat: 39.2904, lng: -76.6122},
+            'Baltimore_21202': {lat: 39.2948, lng: -76.6064},
+            'Baltimore_21205': {lat: 39.2957, lng: -76.5844},
+            'Baltimore_21206': {lat: 39.3211, lng: -76.5572},
+            'Baltimore_21207': {lat: 39.3226, lng: -76.7242},
+            'Baltimore_21211': {lat: 39.3273, lng: -76.6208},
+            'Baltimore_21212': {lat: 39.3626, lng: -76.6105},
+            'Baltimore_21213': {lat: 39.3098, lng: -76.5844},
+            'Baltimore_21214': {lat: 39.3426, lng: -76.5611},
+            'Baltimore_21215': {lat: 39.3451, lng: -76.6744},
+            'Baltimore_21216': {lat: 39.3123, lng: -76.6758},
+            'Baltimore_21217': {lat: 39.3073, lng: -76.6369},
+            'Baltimore_21218': {lat: 39.3198, lng: -76.6022},
+            'Baltimore_21223': {lat: 39.2848, lng: -76.6461},
+            'Baltimore_21224': {lat: 39.2843, lng: -76.5511},
+            'Baltimore_21225': {lat: 39.2296, lng: -76.6522},
+            'Baltimore_21229': {lat: 39.2843, lng: -76.6897},
+            'Baltimore_21230': {lat: 39.2726, lng: -76.6247},
+            'Baltimore_21231': {lat: 39.2893, lng: -76.5936},
+            
+            // BALTIMORE COUNTY
+            'Baltimore_21220': {lat: 39.2851, lng: -76.5194},
+            'Baltimore_21221': {lat: 39.2948, lng: -76.4672},
+            'Baltimore_21222': {lat: 39.2726, lng: -76.5244},
+            'Catonsville_21228': {lat: 39.2726, lng: -76.7319},
+            'Dundalk_21222': {lat: 39.2506, lng: -76.5205},
+            'Essex_21221': {lat: 39.3093, lng: -76.4719},
+            'Randallstown_21133': {lat: 39.3676, lng: -76.7953},
+            'Reisterstown_21136': {lat: 39.4698, lng: -76.8286},
+            'Towson_21204': {lat: 39.4015, lng: -76.6019},
+            'Towson_21286': {lat: 39.3948, lng: -76.5733},
+            'Upper Falls_21156': {lat: 39.4573, lng: -76.4347},
+            'Woodlawn_21207': {lat: 39.3226, lng: -76.7281},
+            
+            // CALVERT COUNTY
+            'Huntingtown_20639': {lat: 38.6262, lng: -76.6069},
+            'North Beach_20614': {lat: 38.7073, lng: -76.5319},
+            'Prince Frederick_20678': {lat: 38.5401, lng: -76.5858},
+            'Solomons_20688': {lat: 38.3251, lng: -76.4597},
+            
+            // CAROLINE COUNTY
+            'Ridgely_21660': {lat: 38.9484, lng: -75.8819},
+            
+            // CARROLL COUNTY
+            'Eldersburg_21784': {lat: 39.4023, lng: -76.9500},
+            'Taneytown_21787': {lat: 39.6601, lng: -77.1697},
+            'Westminster_21158': {lat: 39.5754, lng: -77.0011},
+            
+            // CECIL COUNTY
+            'Elkton_21921': {lat: 39.6068, lng: -75.8333},
+            'Elkton_21922': {lat: 39.6068, lng: -75.8333},
+            'North East_21901': {lat: 39.5993, lng: -75.9416},
+            'Perryville_21903': {lat: 39.5612, lng: -76.0708},
+            'Port Deposit_21904': {lat: 39.6062, lng: -76.1194},
+            
+            // CHARLES COUNTY
+            'Indian Head_20640': {lat: 38.6001, lng: -77.1608},
+            'La Plata_20646': {lat: 38.5293, lng: -76.9755},
+            'Waldorf_20601': {lat: 38.6265, lng: -76.9394},
+            'Waldorf_20602': {lat: 38.6265, lng: -76.9394},
+            'Waldorf_20604': {lat: 38.6265, lng: -76.9394},
+            
+            // DORCHESTER COUNTY
+            'Cambridge_21613': {lat: 38.5631, lng: -76.0794},
+            
+            // FREDERICK COUNTY
+            'Brunswick_21716': {lat: 39.3151, lng: -77.6278},
+            'Emmitsburg_21727': {lat: 39.7043, lng: -77.3269},
+            'Frederick_21701': {lat: 39.4143, lng: -77.4105},
+            'Jefferson_21755': {lat: 39.3651, lng: -77.5397},
+            'Middletown_21769': {lat: 39.4426, lng: -77.5447},
+            'Thurmont_21788': {lat: 39.6243, lng: -77.4108},
+            'Walkersville_21793': {lat: 39.4843, lng: -77.3547},
+            
+            // HARFORD COUNTY
+            'Aberdeen_21001': {lat: 39.5095, lng: -76.1644},
+            'Bel Air_21014': {lat: 39.5362, lng: -76.3483},
+            'Darlington_21034': {lat: 39.6273, lng: -76.1755},
+            'Edgewood_21040': {lat: 39.4187, lng: -76.2944},
+            'Forest Hill_21050': {lat: 39.5787, lng: -76.3947},
+            'Havre de Grace_21078': {lat: 39.5493, lng: -76.0916},
+            'Joppa_21085': {lat: 39.4262, lng: -76.3583},
+            
+            // HOWARD COUNTY
+            'Columbia_21044': {lat: 39.2037, lng: -76.8610},
+            'Columbia_20145': {lat: 39.2037, lng: -76.8610},
+            'Ellicott City_21041': {lat: 39.2673, lng: -76.7983},
+            'Ellicott City_21042': {lat: 39.2673, lng: -76.7983},
+            'Elkridge_21075': {lat: 39.2123, lng: -76.7136},
+            'Savage_20763': {lat: 39.1376, lng: -76.8269},
+            
+            // KENT COUNTY
+            'Chestertown_21620': {lat: 39.2090, lng: -76.0658},
+            
+            // MONTGOMERY COUNTY
+            'Bethesda_20817': {lat: 38.9807, lng: -77.1028},
+            'Gaithersburg_20877': {lat: 39.1434, lng: -77.2014},
+            'Gaithersburg_20886': {lat: 39.1434, lng: -77.2014},
+            'Rockville_20848': {lat: 39.0840, lng: -77.1528},
+            'Rockville_20850': {lat: 39.0840, lng: -77.1528},
+            'Rockville_20851': {lat: 39.0840, lng: -77.1528},
+            'Rockville_20852': {lat: 39.0840, lng: -77.1528},
+            'Silver Spring_20905': {lat: 38.9907, lng: -77.0261},
+            
+            // PRINCE GEORGE'S COUNTY
+            'Brandywine_20613': {lat: 38.6962, lng: -76.8553},
+            'Capitol Heights_20743': {lat: 38.8848, lng: -76.9158},
+            'Cheverly_20785': {lat: 38.9279, lng: -76.9158},
+            'College Park_20740': {lat: 38.9807, lng: -76.9369},
+            'Fairmont Heights_20743': {lat: 38.8990, lng: -76.9158},
+            'Forestville_20747': {lat: 38.8451, lng: -76.8747},
+            'Fort Washington_20744': {lat: 38.7074, lng: -77.0236},
+            'Hyattsville_20781': {lat: 38.9559, lng: -76.9453},
+            'Hyattsville_20782': {lat: 38.9559, lng: -76.9453},
+            'Hyattsville_20783': {lat: 38.9559, lng: -76.9453},
+            'Landover_20785': {lat: 38.9340, lng: -76.8969},
+            'Laurel_20706': {lat: 39.0993, lng: -76.8483},
+            'Laurel_20724': {lat: 39.0993, lng: -76.8483},
+            'Oxon Hill_20745': {lat: 38.8034, lng: -76.9897},
+            'Riverdale_20737': {lat: 38.9626, lng: -76.9319},
+            'Silver Spring_20910': {lat: 38.9907, lng: -77.0261},
+            'Suitland_20746': {lat: 38.8487, lng: -76.9275},
+            'Suitland_20747': {lat: 38.8487, lng: -76.9275},
+            'Temple Hills_20748': {lat: 38.8173, lng: -76.9453},
+            
+            // QUEEN ANNE'S COUNTY
+            'Centerville_21617': {lat: 39.0412, lng: -76.0697},
+            'Chester_21619': {lat: 38.9651, lng: -76.2841},
+            'Sudlersville_21668': {lat: 39.1876, lng: -75.8580},
+            
+            // SOMERSET COUNTY
+            'Crisfield_21817': {lat: 37.9834, lng: -75.8538},
+            'Princess Anne_21853': {lat: 38.2029, lng: -75.6927},
+            'Upper Fairmount_21867': {lat: 38.1626, lng: -75.8119},
+            'Westover_21871': {lat: 38.1345, lng: -75.7080},
+            
+            // ST. MARY'S COUNTY
+            'Avenue_20609': {lat: 38.2687, lng: -76.7744},
+            'Leonardtown_20650': {lat: 38.2912, lng: -76.6358},
+            'Lexington Park_20653': {lat: 38.2665, lng: -76.4536},
+            
+            // TALBOT COUNTY
+            'Easton_21601': {lat: 38.7743, lng: -76.0766},
+            
+            // WASHINGTON COUNTY
+            'Boonsboro_21713': {lat: 39.5076, lng: -77.6508},
+            'Hagerstown_21740': {lat: 39.6418, lng: -77.7200},
+            'Hancock_21750': {lat: 39.6992, lng: -78.1797},
+            'Williamsport_21795': {lat: 39.6001, lng: -77.8197},
+            
+            // WICOMICO COUNTY
+            'Bivalve_21814': {lat: 38.3951, lng: -75.9272},
+            'Nanticoke_21840': {lat: 38.2718, lng: -75.6738},
+            'Salisbury_21801': {lat: 38.3607, lng: -75.5994},
+            'Salisbury_21803': {lat: 38.3607, lng: -75.5994},
+            'Salisbury_21804': {lat: 38.3607, lng: -75.5994},
+            'Salisbury_21874': {lat: 38.3607, lng: -75.5994},
+            
+            // WORCESTER COUNTY
+            'Berlin_21811': {lat: 38.3226, lng: -75.2180},
+            'Ocean City_21842': {lat: 38.3365, lng: -75.0849},
+            'Pocomoke_21851': {lat: 38.0762, lng: -75.5677},
+            'Snow Hill_21863': {lat: 38.1762, lng: -75.3944},
+            'Whaleyville_21872': {lat: 38.3526, lng: -75.3152}
+        };
 
-            pantries.forEach(pantry => {
-                // Extract city from address
-                const addressParts = pantry.address.split(',');
-                const city = addressParts[addressParts.length - 2]?.trim().split(' ')[0];
+        // County-based default coordinates (fallback for unmatched addresses)
+        const countyDefaults = {
+            'Allegany': {lat: 39.6529, lng: -78.7625},
+            'Anne Arundel': {lat: 38.9784, lng: -76.4922},
+            'Baltimore City': {lat: 39.2904, lng: -76.6122},
+            'Baltimore County': {lat: 39.3226, lng: -76.7242},
+            'Calvert': {lat: 38.5401, lng: -76.5858},
+            'Caroline': {lat: 38.9484, lng: -75.8819},
+            'Carroll': {lat: 39.5754, lng: -77.0011},
+            'Cecil': {lat: 39.6068, lng: -75.8333},
+            'Charles': {lat: 38.5293, lng: -76.9755},
+            'Dorchester': {lat: 38.5631, lng: -76.0794},
+            'Frederick': {lat: 39.4143, lng: -77.4105},
+            'Harford': {lat: 39.5362, lng: -76.3483},
+            'Howard': {lat: 39.2673, lng: -76.7983},
+            'Kent': {lat: 39.2090, lng: -76.0658},
+            'Montgomery': {lat: 39.0840, lng: -77.1528},
+            'Prince George\'s': {lat: 38.9807, lng: -76.9369},
+            'Queen Anne\'s': {lat: 39.0412, lng: -76.0697},
+            'Somerset': {lat: 38.2029, lng: -75.6927},
+            'St. Mary\'s': {lat: 38.2912, lng: -76.6358},
+            'Talbot': {lat: 38.7743, lng: -76.0766},
+            'Washington': {lat: 39.6418, lng: -77.7200},
+            'Wicomico': {lat: 38.3607, lng: -75.5994},
+            'Worcester': {lat: 38.3226, lng: -75.2180}
+        };
+
+        // Helper function: Extract ZIP code from address string
+        function extractZipCode(address) {
+            const zipMatch = address.match(/\b(\d{5})\b/);
+            return zipMatch ? zipMatch[1] : null;
+        }
+
+        // Helper function: Extract and clean city name from address
+        function extractCityName(address) {
+            const parts = address.split(',');
+            if (parts.length < 2) return null;
+            
+            // Get second-to-last part (usually the city)
+            let city = parts[parts.length - 2].trim();
+            
+            // Remove state abbreviation if present
+            city = city.replace(/\s+MD\s*$/i, '').trim();
+            
+            // Handle common abbreviations
+            const abbreviations = {
+                'Balto.': 'Baltimore',
+                'Balto': 'Baltimore',
+                'GB': 'Glen Burnie',
+                'N.E.': 'North East',
+                'Hgts.': 'Heights',
+                'Hgts': 'Heights'
+            };
+            
+            for (const [abbr, full] of Object.entries(abbreviations)) {
+                if (city.includes(abbr)) {
+                    city = city.replace(abbr, full);
+                }
+            }
+            
+            return city.trim();
+        }
+
+        // Helper function: Create normalized lookup key
+        function createLookupKey(city, zipcode) {
+            if (!city || !zipcode) return null;
+            
+            // Normalize city name: proper case, no extra spaces
+            city = city.trim()
+                       .split(' ')
+                       .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                       .join(' ');
+            
+            return `${city}_${zipcode}`;
+        }
+
+        // Helper function: Find coordinates with multiple fallback strategies
+        function findCoordinates(address, county) {
+            const zipcode = extractZipCode(address);
+            const city = extractCityName(address);
+            
+            // Strategy 1: Exact city_zip match
+            if (city && zipcode) {
+                const key = createLookupKey(city, zipcode);
+                if (cityCoords[key]) {
+                    return cityCoords[key];
+                }
+            }
+            
+            // Strategy 2: Find any entry matching this ZIP code
+            if (zipcode) {
+                for (const [key, coords] of Object.entries(cityCoords)) {
+                    if (key.endsWith(`_${zipcode}`)) {
+                        return coords;
+                    }
+                }
+            }
+            
+            // Strategy 3: Find any entry matching this city (first match)
+            if (city) {
+                const normalizedCity = city.trim()
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .join(' ');
                 
-                if (city && cityCoords[city]) {
-                    pantry.lat = cityCoords[city].lat;
-                    pantry.lng = cityCoords[city].lng;
+                for (const [key, coords] of Object.entries(cityCoords)) {
+                    if (key.startsWith(`${normalizedCity}_`)) {
+                        return coords;
+                    }
+                }
+            }
+            
+            // Strategy 4: Default to county-based coordinates (fallback)
+            if (county && countyDefaults[county]) {
+                return countyDefaults[county];
+            }
+            
+            // Final fallback: Maryland geographic center
+            return {lat: 39.0458, lng: -76.6413};
+        }
+
+        // Enhanced geocoding function with ZIP code-level precision
+        async function geocodePantries() {
+            let successCount = 0;
+            let countyFallbackCount = 0;
+            let centerFallbackCount = 0;
+            
+            pantries.forEach(pantry => {
+                const coords = findCoordinates(pantry.address, pantry.county);
+                pantry.lat = coords.lat;
+                pantry.lng = coords.lng;
+                
+                // Track which strategy was used (for debugging)
+                const zipcode = extractZipCode(pantry.address);
+                const city = extractCityName(pantry.address);
+                
+                if (city && zipcode) {
+                    const key = createLookupKey(city, zipcode);
+                    if (cityCoords[key]) {
+                        successCount++;
+                    } else if (countyDefaults[pantry.county]) {
+                        countyFallbackCount++;
+                    } else {
+                        centerFallbackCount++;
+                    }
                 } else {
-                    // Default to Baltimore if city not found
-                    pantry.lat = 39.2904;
-                    pantry.lng = -76.6122;
+                    countyFallbackCount++;
                 }
             });
+            
+            // Log statistics for verification
+            console.log(`✓ Geocoded ${successCount} pantries with ZIP-level precision`);
+            console.log(`⚠ Used county fallback for ${countyFallbackCount} pantries`);
+            if (centerFallbackCount > 0) {
+                console.log(`⚠ Used state center fallback for ${centerFallbackCount} pantries`);
+            }
+            console.log(`Total pantries: ${pantries.length}`);
         }
 
         async function searchByAddress() {
@@ -679,7 +1366,7 @@
                     <a href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(pantry.address)}" 
                        target="_blank" 
                        class="btn-directions">
-                        Get Directions →
+                        Get Directions  →
                     </a>
                 `;
                 
