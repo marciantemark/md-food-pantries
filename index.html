@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maryland Food Pantry Locator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-top: 4px solid #2c5aa0;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .header-text {
+            flex: 1;
+        }
+
+        h1 {
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .disclaimer {
+            background: #eff6ff;
+            border-left: 4px solid #2c5aa0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .disclaimer a {
+            color: #2c5aa0;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .disclaimer a:hover {
+            text-decoration: underline;
+        }
+
+        .search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #2c5aa0;
+        }
+
+        button {
+            padding: 15px 30px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1e3a8a;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #047857;
+        }
+
+        .btn-secondary:hover {
+            background: #065f46;
+        }
+
+        .county-filter {
+            margin-top: 15px;
+        }
+
+        .county-filter label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #2c5aa0;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .results-header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .results-header h2 {
+            color: #1a202c;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .results-count {
+            color: #4a5568;
+        }
+
+        .pantry-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s;
+            border-left: 4px solid #2c5aa0;
+        }
+
+        .pantry-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .pantry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .pantry-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a202c;
+            flex: 1;
+        }
+
+        .distance-badge {
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .pantry-info {
+            margin: 10px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-row {
+            display: flex;
+            margin: 8px 0;
+            gap: 10px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            min-width: 80px;
+            color: #2c5aa0;
+        }
+
+        .info-value {
+            flex: 1;
+        }
+
+        .btn-directions {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 24px;
+            background: #047857;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+            font-size: 15px;
+        }
+
+        .btn-directions:hover {
+            background: #065f46;
+        }
+
+        .error {
+            background: #fee;
+            border-left: 4px solid #e53e3e;
+            padding: 20px;
+            border-radius: 8px;
+            color: #742a2a;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .error.active {
+            display: block;
+        }
+
+        .no-results {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            display: none;
+        }
+
+        .no-results.active {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .pantry-header {
+                flex-direction: column;
+            }
+
+            .distance-badge {
+                align-self: flex-start;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Maryland Food Pantry Locator</h1>
+            <p class="subtitle">This is a resource for those affected by the government shutdown. If you're facing food insecurity, we want to help. The <a href="https://mdfoodbank.org/find-food/" target="_blank" style="color: #2c5aa0; font-weight: 600; text-decoration: none;">Maryland Food Bank</a> is also a great resource for finding food assistance.</p>
+            <div class="disclaimer">
+                <strong>Note:</strong> For the most up-to-date information on food assistance in Maryland, please visit 
+                <a href="https://www.mdhungersolutions.org/get-help/" target="_blank">mdhungersolutions.org/get-help</a>. 
+                This tool provides a simple way to quickly find nearby food pantries.
+            </div>
+        </header>
+
+        <div class="search-box">
+            <div class="input-group">
+                <input type="text" id="addressInput" placeholder="Enter your address or ZIP code">
+                <button onclick="searchByAddress()">Search</button>
+            </div>
+            <button class="btn-secondary" onclick="useCurrentLocation()" style="width: 100%;">
+                Use My Current Location
+            </button>
+            
+            <div class="county-filter">
+                <label for="countySelect">Or browse by county:</label>
+                <select id="countySelect" onchange="filterByCounty()">
+                    <option value="">-- Select a County --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Finding food pantries near you...</p>
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <div class="no-results" id="noResults">
+            <h2>No pantries found within 5 miles</h2>
+            <p>Try searching by county or expanding your search radius.</p>
+        </div>
+
+        <div class="results" id="results">
+            <div class="results-header">
+                <h2>Food Pantries Near You</h2>
+                <p class="results-count" id="resultsCount"></p>
+            </div>
+            <div id="pantryList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Food pantry data extracted from PDF
+        const pantries = [
+            // Anne Arundel County
+            {name: "Salvation Army", address: "351 Hilltop Lane, Annapolis, MD 21401", hours: "8am-12pm, 12:30pm-4pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "Salvation Army", address: "511 So. Crain Hwy., Glen Burnie, MD 21061", hours: "9am-4pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "SPAN", address: "400 Benfield Rd., Severna Park, MD 21146", hours: "10am-2pm, 5pm-7pm", days: "Mon-Fri, Mon only", county: "Anne Arundel"},
+            {name: "Asbury UMC", address: "87 West Street, Annapolis, MD 21401", hours: "1-3pm", days: "Wed, Fri, Sat", county: "Anne Arundel"},
+            {name: "Heritage Baptist", address: "1740 Forest Drive, Annapolis, MD 21401", hours: "8am-11:30am, 1:30-3pm", days: "Mon-Fri", county: "Anne Arundel"},
+            {name: "NCEON", address: "304 5th St., Glen Burnie, MD 21061", hours: "10am-3:30pm", days: "Mon, Wed, Fri", county: "Anne Arundel"},
+            {name: "Christian Assistance Program", address: "1239 Murray Rd, Odenton, MD 21113", hours: "11am-1pm, 3pm-5pm", days: "Tue, Thu", county: "Anne Arundel"},
+            {name: "St. Elizabeth Ann Seton", address: "1800 Seton Dr., Crofton, MD 21114", hours: "9am-4pm", days: "Mon-Fri", county: "Anne Arundel"},
+            
+            // Baltimore City (sample - adding key locations)
+            {name: "Franciscan Center, Inc.", address: "2212 Maryland Ave., Baltimore, MD 21218", hours: "10am-2pm", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Our Daily Bread", address: "19 W. Franklin St., Baltimore, MD 21201", hours: "Various", days: "Everyday", county: "Baltimore City"},
+            {name: "Paul's Place Outreach Center", address: "1118 Ward St., Baltimore, MD 21230", hours: "8:30am-11am", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Manna House", address: "435 E 25th St., Baltimore, MD 21218", hours: "8:30am-10:30am", days: "Mon-Fri", county: "Baltimore City"},
+            {name: "Maryland Food Bank", address: "2200 Halethorpe Farms Rd., Baltimore, MD 21227", hours: "9am-4pm", days: "Mon-Fri", county: "Baltimore City"},
+            
+            // Baltimore County
+            {name: "Community Assistance Network Inc", address: "7701 Dunmanway, Dundalk MD 21222", hours: "9:30am-11:30am, 1:30pm-3:30pm", days: "Mon-Fri", county: "Baltimore County"},
+            {name: "Eastern Interfaith Outreach", address: "531 Eastern Bend, Essex, MD 21221", hours: "10am-2pm", days: "Mon, Wed, Fri", county: "Baltimore County"},
+            {name: "The Liberty Assistance Ctr.", address: "9019 Liberty Rd., Randallstown, MD 21113", hours: "10am-2pm", days: "Mon, Wed, Thu, Fri", county: "Baltimore County"},
+            
+            // Carroll County
+            {name: "Westminster Food Bank", address: "10 Distillery Dr., P.O. Box 2160, Westminster, MD 21158", hours: "10am-11:15am, 1pm-2:15pm, 9am-12noon", days: "Tue-Thu, Sat", county: "Carroll"},
+            
+            // Frederick County
+            {name: "Frederick Community Action Council", address: "100 S. Market Street, Frederick, MD 21701", hours: "2pm-4pm, 7pm-9pm", days: "M, T, Th, F, Wed", county: "Frederick"},
+            
+            // Harford County
+            {name: "Community Action Agency", address: "33 W. Courtland St., Bel Air, MD 21014", hours: "8:30am-4:30pm", days: "Mon-Fri", county: "Harford"},
+            {name: "Manna House-Bel Air United Methodist Church", address: "21 Linwood Ave., Bel Air, MD 21014", hours: "11:30am-1pm", days: "Wed", county: "Harford"},
+            {name: "Salvation Army", address: "300 Rear Seneca Ave., Havre de Grace, MD 21078", hours: "9am-3pm", days: "Mon-Fri", county: "Harford"},
+            
+            // Howard County
+            {name: "FISH", address: "P.O. Box 34, Ellicott City, MD 21041", hours: "Call", days: "Mon-Fri", county: "Howard"},
+            {name: "Columbia Community Care", address: "Various locations in Columbia", hours: "Varies", days: "Various", county: "Howard"},
+            
+            // Montgomery County
+            {name: "Community Ministries of Montgomery County", address: "114 W. Montgomery Ave., Rockville, MD 20850", hours: "Varies", days: "Various", county: "Montgomery"},
+            {name: "Manna Food Center", address: "9311 Gaither Rd, Gaithersburg, MD 20877", hours: "9am-5pm", days: "Mon-Fri", county: "Montgomery"},
+            
+            // Prince George's County
+            {name: "Community Support Systems", address: "13500 Baden-Westwood Rd., Brandywine, MD 20613", hours: "9:30am-11:30am", days: "Wed, Fri", county: "Prince George's"},
+            {name: "First Baptist Church of Suitland", address: "5400 Silver Hill Rd., Suitland, MD 20747", hours: "9am-4pm", days: "Mon-Fri", county: "Prince George's"},
+            {name: "Fish of Greater Laurel, Inc.", address: "308 Gorman Ave., Laurel MD 20724", hours: "11am-2pm", days: "Tue, Thu, Sat", county: "Prince George's"},
+            {name: "Help By Phone", address: "6100 Westchester Park Dr., College Park, MD 20740", hours: "9am-5pm, 9am-12noon", days: "Mon, Thu, Fri", county: "Prince George's"},
+            
+            // Washington County
+            {name: "Salvation Army", address: "524 West Franklin Street, Hagerstown, MD 21740", hours: "9am-4pm", days: "Mon-Fri", county: "Washington"},
+            {name: "Community Food Bank", address: "601 Washington Ave., Hagerstown, MD 21740", hours: "1pm-3pm", days: "Mon, Tue, Thu, Fri", county: "Washington"},
+            {name: "Adventist Community Center", address: "50 E. Franklin St., Hagerstown, MD 21740", hours: "10am-3pm", days: "Tue, Thu", county: "Washington"},
+            
+            // Wicomico County
+            {name: "Salvation Army", address: "407 Oak St., PO Box 3235 Salisbury, MD 21874", hours: "9am-12noon, 1pm-3pm", days: "Mon-Fri", county: "Wicomico"},
+            {name: "Joseph House", address: "812 Boundary St., P.O. Box 1755, Salisbury, MD", hours: "9:30am-12noon", days: "Tue, Wed, Thu", county: "Wicomico"},
+            
+            // Charles County
+            {name: "Catholic Charities", address: "513 E. Charles St., La Plata, MD 20646", hours: "9am-5pm, 12pm-9pm", days: "M, W, Th, F, Tu", county: "Charles"},
+            {name: "Calvary United Methodist", address: "3235 Leonardtown Rd., Waldorf, MD 20601", hours: "10am-4pm", days: "Tue & Fri", county: "Charles"}
+        ];
+
+        let userLat = null;
+        let userLng = null;
+
+        // Populate county dropdown
+        function populateCounties() {
+            const counties = [...new Set(pantries.map(p => p.county))].sort();
+            const select = document.getElementById('countySelect');
+            counties.forEach(county => {
+                const option = document.createElement('option');
+                option.value = county;
+                option.textContent = county + ' County';
+                select.appendChild(option);
+            });
+        }
+
+        // Calculate distance between two points using Haversine formula
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 3959; // Earth's radius in miles
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                     Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                     Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function toRad(degrees) {
+            return degrees * Math.PI / 180;
+        }
+
+        // Geocode address using Nominatim (free, no API key required)
+        async function geocodeAddress(address) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address + ', Maryland, USA')}&limit=1`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data && data.length > 0) {
+                    return {
+                        lat: parseFloat(data[0].lat),
+                        lng: parseFloat(data[0].lon)
+                    };
+                }
+                return null;
+            } catch (error) {
+                console.error('Geocoding error:', error);
+                return null;
+            }
+        }
+
+        // Geocode all pantries (simplified - using approximate coordinates)
+        async function geocodePantries() {
+            // In a production environment, you'd geocode all addresses
+            // For now, using approximate coordinates for major cities
+            const cityCoords = {
+                'Annapolis': {lat: 38.9784, lng: -76.4922},
+                'Baltimore': {lat: 39.2904, lng: -76.6122},
+                'Glen Burnie': {lat: 39.1626, lng: -76.6247},
+                'Severna Park': {lat: 39.0701, lng: -76.5444},
+                'Odenton': {lat: 39.0840, lng: -76.7019},
+                'Crofton': {lat: 39.0018, lng: -76.6869},
+                'Dundalk': {lat: 39.2506, lng: -76.5205},
+                'Essex': {lat: 39.3093, lng: -76.4719},
+                'Randallstown': {lat: 39.3676, lng: -76.7953},
+                'Westminster': {lat: 39.5754, lng: -77.0011},
+                'Frederick': {lat: 39.4143, lng: -77.4105},
+                'Bel Air': {lat: 39.5362, lng: -76.3483},
+                'Havre de Grace': {lat: 39.5493, lng: -76.0916},
+                'Ellicott City': {lat: 39.2673, lng: -76.7983},
+                'Columbia': {lat: 39.2037, lng: -76.8610},
+                'Rockville': {lat: 39.0840, lng: -77.1528},
+                'Gaithersburg': {lat: 39.1434, lng: -77.2014},
+                'Brandywine': {lat: 38.6962, lng: -76.8553},
+                'Suitland': {lat: 38.8487, lng: -76.9275},
+                'Laurel': {lat: 39.0993, lng: -76.8483},
+                'College Park': {lat: 38.9807, lng: -76.9369},
+                'Hagerstown': {lat: 39.6418, lng: -77.7200},
+                'Salisbury': {lat: 38.3607, lng: -75.5994},
+                'La Plata': {lat: 38.5293, lng: -76.9755},
+                'Waldorf': {lat: 38.6265, lng: -76.9394}
+            };
+
+            pantries.forEach(pantry => {
+                // Extract city from address
+                const addressParts = pantry.address.split(',');
+                const city = addressParts[addressParts.length - 2]?.trim().split(' ')[0];
+                
+                if (city && cityCoords[city]) {
+                    pantry.lat = cityCoords[city].lat;
+                    pantry.lng = cityCoords[city].lng;
+                } else {
+                    // Default to Baltimore if city not found
+                    pantry.lat = 39.2904;
+                    pantry.lng = -76.6122;
+                }
+            });
+        }
+
+        async function searchByAddress() {
+            const address = document.getElementById('addressInput').value.trim();
+            
+            if (!address) {
+                showError('Please enter an address or ZIP code');
+                return;
+            }
+
+            showLoading();
+            hideError();
+            hideResults();
+
+            const coords = await geocodeAddress(address);
+            
+            if (!coords) {
+                hideLoading();
+                showError('Could not find that address. Please try again or use a ZIP code.');
+                return;
+            }
+
+            userLat = coords.lat;
+            userLng = coords.lng;
+            
+            findNearbyPantries(userLat, userLng);
+        }
+
+        function useCurrentLocation() {
+            if (!navigator.geolocation) {
+                showError('Geolocation is not supported by your browser');
+                return;
+            }
+
+            showLoading();
+            hideError();
+            hideResults();
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    userLat = position.coords.latitude;
+                    userLng = position.coords.longitude;
+                    findNearbyPantries(userLat, userLng);
+                },
+                (error) => {
+                    hideLoading();
+                    showError('Unable to get your location. Please enter an address instead.');
+                }
+            );
+        }
+
+        function findNearbyPantries(lat, lng) {
+            const pantriesWithDistance = pantries.map(pantry => ({
+                ...pantry,
+                distance: calculateDistance(lat, lng, pantry.lat, pantry.lng)
+            }));
+
+            const nearby = pantriesWithDistance
+                .filter(p => p.distance <= 5)
+                .sort((a, b) => a.distance - b.distance);
+
+            hideLoading();
+
+            if (nearby.length === 0) {
+                showNoResults();
+            } else {
+                displayResults(nearby);
+            }
+        }
+
+        function filterByCounty() {
+            const county = document.getElementById('countySelect').value;
+            
+            if (!county) return;
+
+            hideError();
+            hideNoResults();
+            
+            const filtered = pantries.filter(p => p.county === county);
+            displayResults(filtered, true);
+        }
+
+        function displayResults(pantries, isCountyFilter = false) {
+            const resultsDiv = document.getElementById('results');
+            const pantryList = document.getElementById('pantryList');
+            const resultsCount = document.getElementById('resultsCount');
+
+            pantryList.innerHTML = '';
+            
+            if (isCountyFilter) {
+                resultsCount.textContent = `${pantries.length} pantries in this county`;
+            } else {
+                resultsCount.textContent = `${pantries.length} pantries within 5 miles`;
+            }
+
+            pantries.forEach(pantry => {
+                const card = document.createElement('div');
+                card.className = 'pantry-card';
+                
+                card.innerHTML = `
+                    <div class="pantry-header">
+                        <div class="pantry-name">${pantry.name}</div>
+                        ${pantry.distance ? `<div class="distance-badge">${pantry.distance.toFixed(1)} mi</div>` : ''}
+                    </div>
+                    <div class="pantry-info">
+                        <div class="info-row">
+                            <div class="info-label">Address:</div>
+                            <div class="info-value">${pantry.address}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Hours:</div>
+                            <div class="info-value">${pantry.hours}</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Days:</div>
+                            <div class="info-value">${pantry.days}</div>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(pantry.address)}" 
+                       target="_blank" 
+                       class="btn-directions">
+                        Get Directions →
+                    </a>
+                `;
+                
+                pantryList.appendChild(card);
+            });
+
+            resultsDiv.classList.add('active');
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showLoading() {
+            document.getElementById('loading').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('active');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('active');
+        }
+
+        function hideError() {
+            document.getElementById('error').classList.remove('active');
+        }
+
+        function showNoResults() {
+            document.getElementById('noResults').classList.add('active');
+        }
+
+        function hideNoResults() {
+            document.getElementById('noResults').classList.remove('active');
+        }
+
+        function hideResults() {
+            document.getElementById('results').classList.remove('active');
+            hideNoResults();
+        }
+
+        // Initialize
+        populateCounties();
+        geocodePantries();
+
+        // Allow Enter key to search
+        document.getElementById('addressInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchByAddress();
+            }
+        });
+    </script>
+</body>
+</html>
